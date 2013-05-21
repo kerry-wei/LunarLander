@@ -1,0 +1,196 @@
+//
+//  WelcomeLayer.cpp
+//  LunarLander
+//
+//  Created by Xiaojiang Wei on 2013-05-19.
+//  Copyright (c) 2013 Xiaojiang Wei. All rights reserved.
+//
+
+#include <X11/Xlib.h>
+#include <sstream>
+#include "WelcomeLayer.h"
+#include "XInfo.h"
+
+using namespace std;
+
+
+WelcomeLayer::WelcomeLayer() {
+    xInfo = XInfo::instance(0, NULL);
+    spaceBetweenMsg = 25;
+    
+    scoreLabelXPos = 15;
+    scoreLabelYPos = 15;
+    scoreLabelWidth = 0;
+    scoreLabelHeight = 0;
+    
+    timeLabelXPos = scoreLabelXPos;
+    timeLabelYPos = scoreLabelYPos + spaceBetweenMsg;
+    timeLabelWidth = 0;
+    timeLabelHeight = 0;
+    
+    fuelLabelXPos = scoreLabelXPos;
+    fuelLabelYPos = timeLabelYPos + spaceBetweenMsg;
+    fuelLabelWidth = 0;
+    fuelLabelHeight = 0;
+    
+    altitudeLabelXPos = 630;
+    altitudeLabelYPos = scoreLabelYPos;
+    altitudeLabelWidth = 0;
+    altitudeLabelHeight = 0;
+    
+    xSpeedLabelXPos = altitudeLabelXPos;
+    xSpeedLabelYPos = altitudeLabelYPos + spaceBetweenMsg;
+    xSpeedLabelWidth = 0;
+    xSpeedLabelHeight = 0;
+    
+    ySpeedLabelXPos = altitudeLabelXPos;
+    ySpeedLabelYPos = xSpeedLabelYPos + spaceBetweenMsg;
+    ySpeedLabelWidth = 0;
+    ySpeedLabelHeight = 0;
+}
+
+
+void WelcomeLayer::drawWelcomeScreen() {
+    XWindowAttributes windowAttr;
+    XGetWindowAttributes(xInfo->display, xInfo->window, &windowAttr);
+    GC gc = XCreateGC(xInfo->display, xInfo->window, 0, 0);
+    XSetBackground(xInfo->display, gc, WhitePixel(xInfo->display, xInfo->screen));
+    XSetForeground(xInfo->display, gc, BlackPixel(xInfo->display, xInfo->screen));
+    
+    // font size: 8, 10, 12, 14, 18, 24
+    XFontStruct *font = XLoadQueryFont(xInfo->display, "-*-helvetica-*-24-*");
+    XSetFont(xInfo->display, gc, font->fid);
+    
+    string beginGame = "Press SPACE to start";
+    int labelWidth = XTextWidth(font, beginGame.c_str(), (int)beginGame.length());
+    int xPosition = windowAttr.width / 2 - labelWidth / 2;
+    int yPosition = windowAttr.height / 2 - 100;
+    XDrawImageString(xInfo->display, xInfo->pixmap, gc, xPosition, yPosition, beginGame.c_str(), (int)beginGame.length());
+    
+    string quitGame = "Press Q to quit";
+    labelWidth = XTextWidth(font, quitGame.c_str(), (int)quitGame.length());
+    xPosition = windowAttr.width / 2 - labelWidth / 2;
+    yPosition = windowAttr.height / 2 + spaceBetweenMsg - 86;
+    XDrawImageString(xInfo->display, xInfo->pixmap, gc, xPosition, yPosition, quitGame.c_str(), (int)quitGame.length());
+    
+    /*
+    
+     */
+    
+    XFlush(xInfo->display);
+}
+
+void WelcomeLayer::clearWelcomeScreen() {
+    XFillRectangle(xInfo->display, xInfo->pixmap, xInfo->gc[1], 0, 0, xInfo->desiredWidth, xInfo->desiredHeight);
+    XClearWindow(xInfo->display, xInfo->window);
+    updateGameInfo(0, 0.0, 0.0, 0.0, 0.0, 0.0);
+}
+
+void WelcomeLayer::updateGameInfo(int score, double time, double fuel, double altitude, double xSpeed, double ySpeed) {
+    //cout << "score: " << score << ", time: " << time << ", fuel: " << fuel << ", altitude: " << altitude << ", xSpeed: " << xSpeed << ", ySpeed:" << ySpeed << endl;
+    
+    if (ySpeed > 0 && ySpeed < 0.001) {
+        cout << "" << endl;
+    }
+    
+    XWindowAttributes windowAttr;
+    XGetWindowAttributes(xInfo->display, xInfo->window, &windowAttr);
+    GC gc = XCreateGC(xInfo->display, xInfo->window, 0, 0);
+    XSetBackground(xInfo->display, gc, WhitePixel(xInfo->display, xInfo->screen));
+    XSetForeground(xInfo->display, gc, BlackPixel(xInfo->display, xInfo->screen));
+    XFontStruct *font = XLoadQueryFont(xInfo->display, "-*-helvetica-*-12-*");
+    XSetFont(xInfo->display, gc, font->fid);
+    
+    string numToString;
+    ostringstream convert;
+    
+    int direction_return;
+    int font_ascent_return, font_descent_return;
+    XCharStruct overall_return;
+    
+    // left side:
+    //XClearArea(xInfo->display, xInfo->pixmap, scoreLabelXPos, scoreLabelYPos - scoreLabelHeight, scoreLabelWidth, scoreLabelHeight, false);
+    string scoreMsg = "SCORE: ";
+    convert.clear();
+    convert.str("");
+    convert << score;
+    numToString = convert.str();
+    scoreMsg += numToString;
+    XTextExtents(font, scoreMsg.c_str(), (int)scoreMsg.length(), &direction_return, &font_ascent_return, &font_descent_return, &overall_return);
+    scoreLabelWidth = XTextWidth(font, scoreMsg.c_str(), (int)scoreMsg.length());
+    scoreLabelHeight = font_ascent_return + font_descent_return;
+    XDrawImageString(xInfo->display, xInfo->pixmap, gc, scoreLabelXPos, scoreLabelYPos, scoreMsg.c_str(), (int)scoreMsg.length());
+    
+    //XClearArea(xInfo->display, xInfo->pixmap, timeLabelXPos, timeLabelYPos - timeLabelHeight, timeLabelWidth, timeLabelHeight, false);
+    string timeMsg = "TIME: ";
+    convert.clear();
+    convert.str("");
+    convert << time;
+    numToString = convert.str();
+    timeMsg += numToString;
+    XTextExtents(font, timeMsg.c_str(), (int)timeMsg.length(), &direction_return, &font_ascent_return, &font_descent_return, &overall_return);
+    timeLabelHeight = font_ascent_return + font_descent_return;
+    timeLabelWidth = XTextWidth(font, timeMsg.c_str(), (int)timeMsg.length());
+    XDrawImageString(xInfo->display, xInfo->pixmap, gc, timeLabelXPos, timeLabelYPos, timeMsg.c_str(), (int)timeMsg.length());
+    
+    //XClearArea(xInfo->display, xInfo->pixmap, fuelLabelXPos, fuelLabelYPos - fuelLabelHeight, fuelLabelWidth, fuelLabelHeight, false);
+    string fuelMsg = "FUEL: ";
+    convert.clear();
+    convert.str("");
+    convert << fuel;
+    numToString = convert.str();
+    fuelMsg += numToString;
+    XTextExtents(font, fuelMsg.c_str(), (int)fuelMsg.length(), &direction_return, &font_ascent_return, &font_descent_return, &overall_return);
+    fuelLabelHeight = font_ascent_return + font_descent_return;
+    fuelLabelWidth = XTextWidth(font, fuelMsg.c_str(), (int)fuelMsg.length());
+    XDrawImageString(xInfo->display, xInfo->pixmap, gc, fuelLabelXPos, fuelLabelYPos, fuelMsg.c_str(), (int)fuelMsg.length());
+    
+    
+    // right side:
+    //XClearArea(xInfo->display, xInfo->pixmap, altitudeLabelXPos, altitudeLabelYPos - altitudeLabelHeight, altitudeLabelWidth + 40, altitudeLabelHeight, false);
+    string altitudeMsg = "ALTITUDE: ";
+    convert.clear();
+    convert.str("");
+    convert << altitude;
+    numToString = convert.str();
+    altitudeMsg += numToString;
+    XTextExtents(font, altitudeMsg.c_str(), (int)altitudeMsg.length(), &direction_return, &font_ascent_return, &font_descent_return, &overall_return);
+    altitudeLabelHeight = font_ascent_return + font_descent_return;
+    altitudeLabelWidth = XTextWidth(font, altitudeMsg.c_str(), (int)altitudeMsg.length());
+    XDrawImageString(xInfo->display, xInfo->pixmap, gc, altitudeLabelXPos, altitudeLabelYPos, altitudeMsg.c_str(), (int)altitudeMsg.length());
+    
+    //XClearArea(xInfo->display, xInfo->pixmap, xSpeedLabelXPos, xSpeedLabelYPos - xSpeedLabelHeight, xSpeedLabelWidth + 40, xSpeedLabelHeight, false);
+    string horizontalSpeedMsg = "HORIZONTAL SPEED: ";
+    convert.clear();
+    convert.str("");
+    convert << xSpeed;
+    numToString = convert.str();
+    horizontalSpeedMsg += numToString;
+    XTextExtents(font, horizontalSpeedMsg.c_str(), (int)horizontalSpeedMsg.length(), &direction_return, &font_ascent_return, &font_descent_return, &overall_return);
+    xSpeedLabelHeight = font_ascent_return + font_descent_return;
+    xSpeedLabelWidth = XTextWidth(font, horizontalSpeedMsg.c_str(), (int)horizontalSpeedMsg.length());
+    XDrawImageString(xInfo->display, xInfo->pixmap, gc, xSpeedLabelXPos, xSpeedLabelYPos, horizontalSpeedMsg.c_str(), (int)horizontalSpeedMsg.length());
+    
+    //XClearArea(xInfo->display, xInfo->pixmap, ySpeedLabelXPos, ySpeedLabelYPos - ySpeedLabelHeight, ySpeedLabelWidth + 40, ySpeedLabelHeight, false);
+    string verticalSpeedMsg = "VERTICAL SPEED: ";
+    convert.clear();
+    convert.str("");
+    convert << ySpeed;
+    numToString = convert.str();
+    verticalSpeedMsg += numToString;
+    XTextExtents(font, verticalSpeedMsg.c_str(), (int)verticalSpeedMsg.length(), &direction_return, &font_ascent_return, &font_descent_return, &overall_return);
+    ySpeedLabelHeight = font_ascent_return + font_descent_return;
+    ySpeedLabelWidth = XTextWidth(font, verticalSpeedMsg.c_str(), (int)verticalSpeedMsg.length());
+    XDrawImageString(xInfo->display, xInfo->pixmap, gc, ySpeedLabelXPos, ySpeedLabelYPos, verticalSpeedMsg.c_str(), (int)verticalSpeedMsg.length());
+    
+}
+
+
+WelcomeLayer::~WelcomeLayer() {
+    
+}
+
+
+
+
+

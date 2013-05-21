@@ -1,0 +1,364 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA5337C7174BBEB2004C4EE2 /* CollisionDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA5337C5174BBEB2004C4EE2 /* CollisionDetector.cpp */; };
+		AA5337CA174BC30E004C4EE2 /* LandingPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA5337C8174BC30E004C4EE2 /* LandingPad.cpp */; };
+		AA61742417456A2300BC1EAA /* GameObjectManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA61742217456A2300BC1EAA /* GameObjectManager.cpp */; };
+		AA6174271745C2EE00BC1EAA /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA6174251745C2EE00BC1EAA /* GameState.cpp */; };
+		AA61742A1745C8B900BC1EAA /* GameSceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA6174281745C8B900BC1EAA /* GameSceneManager.cpp */; };
+		AA61742D1746CE2A00BC1EAA /* TerrainRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA61742B1746CE2A00BC1EAA /* TerrainRenderer.cpp */; };
+		AA61743017471F8C00BC1EAA /* TerrainManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA61742E17471F8C00BC1EAA /* TerrainManager.cpp */; };
+		AA6174331747447F00BC1EAA /* TerrainPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA6174311747447E00BC1EAA /* TerrainPoint.cpp */; };
+		AA6693BE1749BD13005A3019 /* WelcomeLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA6693BC1749BD13005A3019 /* WelcomeLayer.cpp */; };
+		AA95BB0D1742F82900B452BC /* TerrainGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA95BB0B1742F82900B452BC /* TerrainGenerator.cpp */; };
+		AA95BB131743FBE700B452BC /* DrawableObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA95BB111743FBE700B452BC /* DrawableObject.cpp */; };
+		AA95BB161743FD3000B452BC /* Spaceship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA95BB141743FD3000B452BC /* Spaceship.cpp */; };
+		AAD5CEE7173ECAAA0015B6B9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD5CEE6173ECAAA0015B6B9 /* main.cpp */; };
+		AAD5CEE9173ECAAA0015B6B9 /* LunarLander.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = AAD5CEE8173ECAAA0015B6B9 /* LunarLander.1 */; };
+		AAD5CEF1173EFA710015B6B9 /* EventLoopManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD5CEEF173EFA710015B6B9 /* EventLoopManager.cpp */; };
+		AAD5CEF4173EFC150015B6B9 /* XInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD5CEF2173EFC150015B6B9 /* XInfo.cpp */; };
+		AAD5CEF7173EFCFA0015B6B9 /* Utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD5CEF5173EFCFA0015B6B9 /* Utilities.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AAD5CEE1173ECAA90015B6B9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = usr/share/man/man1;
+			dstSubfolderSpec = 0;
+			files = (
+				AAD5CEE9173ECAAA0015B6B9 /* LunarLander.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AA30AEFF174AE6FE00ECA52B /* frame_1.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = frame_1.bmp; sourceTree = "<group>"; };
+		AA30AF00174AE6FE00ECA52B /* frame_2.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = frame_2.bmp; sourceTree = "<group>"; };
+		AA30AF01174AE6FF00ECA52B /* frame_3.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = frame_3.bmp; sourceTree = "<group>"; };
+		AA30AF02174AE70000ECA52B /* frame_4.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = frame_4.bmp; sourceTree = "<group>"; };
+		AA30AF03174AE70100ECA52B /* frame_5.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = frame_5.bmp; sourceTree = "<group>"; };
+		AA30AF04174AE70200ECA52B /* frame_6.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = frame_6.bmp; sourceTree = "<group>"; };
+		AA30AF05174AE70400ECA52B /* frame_7.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = frame_7.bmp; sourceTree = "<group>"; };
+		AA30AF06174AE70600ECA52B /* frame_8.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = frame_8.bmp; sourceTree = "<group>"; };
+		AA30AF07174AE70900ECA52B /* frame_9.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = frame_9.bmp; sourceTree = "<group>"; };
+		AA30AF08174AE70C00ECA52B /* frame_10.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = frame_10.bmp; sourceTree = "<group>"; };
+		AA30AF09174AE71000ECA52B /* frame_11.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = frame_11.bmp; sourceTree = "<group>"; };
+		AA5337C5174BBEB2004C4EE2 /* CollisionDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionDetector.cpp; sourceTree = "<group>"; };
+		AA5337C6174BBEB2004C4EE2 /* CollisionDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionDetector.h; sourceTree = "<group>"; };
+		AA5337C8174BC30E004C4EE2 /* LandingPad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LandingPad.cpp; sourceTree = "<group>"; };
+		AA5337C9174BC30E004C4EE2 /* LandingPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LandingPad.h; sourceTree = "<group>"; };
+		AA61742217456A2300BC1EAA /* GameObjectManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObjectManager.cpp; sourceTree = "<group>"; };
+		AA61742317456A2300BC1EAA /* GameObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObjectManager.h; sourceTree = "<group>"; };
+		AA6174251745C2EE00BC1EAA /* GameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameState.cpp; sourceTree = "<group>"; };
+		AA6174261745C2EE00BC1EAA /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
+		AA6174281745C8B900BC1EAA /* GameSceneManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameSceneManager.cpp; sourceTree = "<group>"; };
+		AA6174291745C8B900BC1EAA /* GameSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSceneManager.h; sourceTree = "<group>"; };
+		AA61742B1746CE2A00BC1EAA /* TerrainRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TerrainRenderer.cpp; sourceTree = "<group>"; };
+		AA61742C1746CE2A00BC1EAA /* TerrainRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainRenderer.h; sourceTree = "<group>"; };
+		AA61742E17471F8C00BC1EAA /* TerrainManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TerrainManager.cpp; sourceTree = "<group>"; };
+		AA61742F17471F8C00BC1EAA /* TerrainManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainManager.h; sourceTree = "<group>"; };
+		AA6174311747447E00BC1EAA /* TerrainPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TerrainPoint.cpp; sourceTree = "<group>"; };
+		AA6174321747447E00BC1EAA /* TerrainPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainPoint.h; sourceTree = "<group>"; };
+		AA6693BC1749BD13005A3019 /* WelcomeLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WelcomeLayer.cpp; sourceTree = "<group>"; };
+		AA6693BD1749BD13005A3019 /* WelcomeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeLayer.h; sourceTree = "<group>"; };
+		AA95BB0B1742F82900B452BC /* TerrainGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TerrainGenerator.cpp; sourceTree = "<group>"; };
+		AA95BB0C1742F82900B452BC /* TerrainGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainGenerator.h; sourceTree = "<group>"; };
+		AA95BB111743FBE700B452BC /* DrawableObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DrawableObject.cpp; sourceTree = "<group>"; };
+		AA95BB121743FBE700B452BC /* DrawableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawableObject.h; sourceTree = "<group>"; };
+		AA95BB141743FD3000B452BC /* Spaceship.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Spaceship.cpp; sourceTree = "<group>"; };
+		AA95BB151743FD3000B452BC /* Spaceship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spaceship.h; sourceTree = "<group>"; };
+		AAD5CEE3173ECAAA0015B6B9 /* LunarLander */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LunarLander; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAD5CEE6173ECAAA0015B6B9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		AAD5CEE8173ECAAA0015B6B9 /* LunarLander.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = LunarLander.1; sourceTree = "<group>"; };
+		AAD5CEEF173EFA710015B6B9 /* EventLoopManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EventLoopManager.cpp; sourceTree = "<group>"; };
+		AAD5CEF0173EFA710015B6B9 /* EventLoopManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventLoopManager.h; sourceTree = "<group>"; };
+		AAD5CEF2173EFC150015B6B9 /* XInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XInfo.cpp; sourceTree = "<group>"; };
+		AAD5CEF3173EFC150015B6B9 /* XInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XInfo.h; sourceTree = "<group>"; };
+		AAD5CEF5173EFCFA0015B6B9 /* Utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utilities.cpp; sourceTree = "<group>"; };
+		AAD5CEF6173EFCFA0015B6B9 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AAD5CEE0173ECAA90015B6B9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA95BB17174451FF00B452BC /* resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = resources;
+			path = LunarLander/resources;
+			sourceTree = "<group>";
+		};
+		AAD5CEDA173ECAA90015B6B9 = {
+			isa = PBXGroup;
+			children = (
+				AA95BB17174451FF00B452BC /* resources */,
+				AAD5CEE5173ECAAA0015B6B9 /* LunarLander */,
+				AAD5CEE4173ECAAA0015B6B9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AAD5CEE4173ECAAA0015B6B9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AAD5CEE3173ECAAA0015B6B9 /* LunarLander */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AAD5CEE5173ECAAA0015B6B9 /* LunarLander */ = {
+			isa = PBXGroup;
+			children = (
+				AA30AEFF174AE6FE00ECA52B /* frame_1.bmp */,
+				AA30AF00174AE6FE00ECA52B /* frame_2.bmp */,
+				AA30AF01174AE6FF00ECA52B /* frame_3.bmp */,
+				AA30AF02174AE70000ECA52B /* frame_4.bmp */,
+				AA30AF03174AE70100ECA52B /* frame_5.bmp */,
+				AA30AF04174AE70200ECA52B /* frame_6.bmp */,
+				AA30AF05174AE70400ECA52B /* frame_7.bmp */,
+				AA30AF06174AE70600ECA52B /* frame_8.bmp */,
+				AA30AF07174AE70900ECA52B /* frame_9.bmp */,
+				AA30AF08174AE70C00ECA52B /* frame_10.bmp */,
+				AA30AF09174AE71000ECA52B /* frame_11.bmp */,
+				AAD5CEE6173ECAAA0015B6B9 /* main.cpp */,
+				AAD5CEE8173ECAAA0015B6B9 /* LunarLander.1 */,
+				AAD5CEEF173EFA710015B6B9 /* EventLoopManager.cpp */,
+				AAD5CEF0173EFA710015B6B9 /* EventLoopManager.h */,
+				AAD5CEF2173EFC150015B6B9 /* XInfo.cpp */,
+				AAD5CEF3173EFC150015B6B9 /* XInfo.h */,
+				AAD5CEF5173EFCFA0015B6B9 /* Utilities.cpp */,
+				AAD5CEF6173EFCFA0015B6B9 /* Utilities.h */,
+				AA95BB111743FBE700B452BC /* DrawableObject.cpp */,
+				AA95BB121743FBE700B452BC /* DrawableObject.h */,
+				AA95BB141743FD3000B452BC /* Spaceship.cpp */,
+				AA95BB151743FD3000B452BC /* Spaceship.h */,
+				AA61742217456A2300BC1EAA /* GameObjectManager.cpp */,
+				AA61742317456A2300BC1EAA /* GameObjectManager.h */,
+				AA6174251745C2EE00BC1EAA /* GameState.cpp */,
+				AA6174261745C2EE00BC1EAA /* GameState.h */,
+				AA6174281745C8B900BC1EAA /* GameSceneManager.cpp */,
+				AA6174291745C8B900BC1EAA /* GameSceneManager.h */,
+				AA95BB0B1742F82900B452BC /* TerrainGenerator.cpp */,
+				AA95BB0C1742F82900B452BC /* TerrainGenerator.h */,
+				AA61742B1746CE2A00BC1EAA /* TerrainRenderer.cpp */,
+				AA61742C1746CE2A00BC1EAA /* TerrainRenderer.h */,
+				AA61742E17471F8C00BC1EAA /* TerrainManager.cpp */,
+				AA61742F17471F8C00BC1EAA /* TerrainManager.h */,
+				AA6174311747447E00BC1EAA /* TerrainPoint.cpp */,
+				AA6174321747447E00BC1EAA /* TerrainPoint.h */,
+				AA6693BC1749BD13005A3019 /* WelcomeLayer.cpp */,
+				AA6693BD1749BD13005A3019 /* WelcomeLayer.h */,
+				AA5337C5174BBEB2004C4EE2 /* CollisionDetector.cpp */,
+				AA5337C6174BBEB2004C4EE2 /* CollisionDetector.h */,
+				AA5337C8174BC30E004C4EE2 /* LandingPad.cpp */,
+				AA5337C9174BC30E004C4EE2 /* LandingPad.h */,
+			);
+			path = LunarLander;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AAD5CEE2173ECAA90015B6B9 /* LunarLander */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AAD5CEEC173ECAAA0015B6B9 /* Build configuration list for PBXNativeTarget "LunarLander" */;
+			buildPhases = (
+				AAD5CEDF173ECAA90015B6B9 /* Sources */,
+				AAD5CEE0173ECAA90015B6B9 /* Frameworks */,
+				AAD5CEE1173ECAA90015B6B9 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LunarLander;
+			productName = LunarLander;
+			productReference = AAD5CEE3173ECAAA0015B6B9 /* LunarLander */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AAD5CEDB173ECAA90015B6B9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Xiaojiang Wei";
+			};
+			buildConfigurationList = AAD5CEDE173ECAA90015B6B9 /* Build configuration list for PBXProject "LunarLander" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AAD5CEDA173ECAA90015B6B9;
+			productRefGroup = AAD5CEE4173ECAAA0015B6B9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AAD5CEE2173ECAA90015B6B9 /* LunarLander */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AAD5CEDF173ECAA90015B6B9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAD5CEE7173ECAAA0015B6B9 /* main.cpp in Sources */,
+				AAD5CEF1173EFA710015B6B9 /* EventLoopManager.cpp in Sources */,
+				AAD5CEF4173EFC150015B6B9 /* XInfo.cpp in Sources */,
+				AAD5CEF7173EFCFA0015B6B9 /* Utilities.cpp in Sources */,
+				AA95BB0D1742F82900B452BC /* TerrainGenerator.cpp in Sources */,
+				AA95BB131743FBE700B452BC /* DrawableObject.cpp in Sources */,
+				AA95BB161743FD3000B452BC /* Spaceship.cpp in Sources */,
+				AA61742417456A2300BC1EAA /* GameObjectManager.cpp in Sources */,
+				AA6174271745C2EE00BC1EAA /* GameState.cpp in Sources */,
+				AA61742A1745C8B900BC1EAA /* GameSceneManager.cpp in Sources */,
+				AA61742D1746CE2A00BC1EAA /* TerrainRenderer.cpp in Sources */,
+				AA61743017471F8C00BC1EAA /* TerrainManager.cpp in Sources */,
+				AA6174331747447F00BC1EAA /* TerrainPoint.cpp in Sources */,
+				AA6693BE1749BD13005A3019 /* WelcomeLayer.cpp in Sources */,
+				AA5337C7174BBEB2004C4EE2 /* CollisionDetector.cpp in Sources */,
+				AA5337CA174BC30E004C4EE2 /* LandingPad.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AAD5CEEA173ECAAA0015B6B9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/X11R6/include;
+				LIBRARY_SEARCH_PATHS = /usr/X11R6/include;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		AAD5CEEB173ECAAA0015B6B9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/X11R6/include;
+				LIBRARY_SEARCH_PATHS = /usr/X11R6/include;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		AAD5CEED173ECAAA0015B6B9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LIBRARY = "libc++";
+				HEADER_SEARCH_PATHS = /usr/X11R6/include;
+				LIBRARY_SEARCH_PATHS = /usr/X11R6/include;
+				OTHER_LDFLAGS = (
+					"-L/usr/X11R6/lib",
+					"-lX11",
+					"-lstdc++",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AAD5CEEE173ECAAA0015B6B9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = /usr/X11R6/include;
+				LIBRARY_SEARCH_PATHS = /usr/X11R6/include;
+				OTHER_LDFLAGS = (
+					"-L/usr/X11R6/lib",
+					"-lX11",
+					"-lstdc++",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AAD5CEDE173ECAA90015B6B9 /* Build configuration list for PBXProject "LunarLander" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAD5CEEA173ECAAA0015B6B9 /* Debug */,
+				AAD5CEEB173ECAAA0015B6B9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AAD5CEEC173ECAAA0015B6B9 /* Build configuration list for PBXNativeTarget "LunarLander" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAD5CEED173ECAAA0015B6B9 /* Debug */,
+				AAD5CEEE173ECAAA0015B6B9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AAD5CEDB173ECAA90015B6B9 /* Project object */;
+}
