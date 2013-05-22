@@ -7,6 +7,7 @@
 //
 
 #include "TerrainRenderer.h"
+#include <vector>
 #include "XInfo.h"
 
 TerrainRenderer* TerrainRenderer::terrainRenderer = NULL;
@@ -23,50 +24,49 @@ TerrainRenderer::TerrainRenderer() {
     
 }
 
-void TerrainRenderer::drawTerrain(vector<TerrainPoint*>* terrain) {
-    /*
-    XInfo *xInfo = XInfo::instance(0, NULL);
-    GC gc = XCreateGC(xInfo->display, xInfo->window, 0, 0);
-	XSetForeground(xInfo->display, gc, BlackPixel(xInfo->display, xInfo->screen));
-	XSetBackground(xInfo->display, gc, WhitePixel(xInfo->display, xInfo->screen));
-	XSetFillStyle(xInfo->display, gc, FillSolid);
-	XSetLineAttributes(xInfo->display, gc, 2, LineSolid, CapRound, JoinMiter);
-    XPoint points[terrain->size()];
-    for (int i = 0; i < terrain->size(); i++) {
-        TerrainPoint *point = terrain->at(i);
-        points[i].x = point->getXCoordinate();
-        points[i].y = point->getYCoordinate();
-    }
-    XDrawLines(xInfo->display, xInfo->window, gc, points, (int)terrain->size(), CoordModeOrigin);
-     */
-    
+void TerrainRenderer::drawTerrain(vector<TerrainSegment>* terrain) {
     XInfo *xInfo = XInfo::instance(0, NULL);
     unsigned long foreground = BlackPixel(xInfo->display, xInfo->screen);
 	unsigned long background = WhitePixel(xInfo->display, xInfo->screen);
     renderTerrain(terrain, foreground, background);
 }
 
-void TerrainRenderer::clearTerrain(vector<TerrainPoint*>* terrain) {
+void TerrainRenderer::clearTerrain(vector<TerrainSegment>* terrain) {
     XInfo *xInfo = XInfo::instance(0, NULL);
     unsigned long foreground = WhitePixel(xInfo->display, xInfo->screen);
 	unsigned long background = WhitePixel(xInfo->display, xInfo->screen);
     renderTerrain(terrain, foreground, background);
 }
 
-void TerrainRenderer::renderTerrain(vector<TerrainPoint*>* terrain, unsigned long foreground, unsigned long background) {
+void TerrainRenderer::renderTerrain(vector<TerrainSegment>* terrain, unsigned long foreground, unsigned long background) {
     XInfo *xInfo = XInfo::instance(0, NULL);
     GC gc = XCreateGC(xInfo->display, xInfo->window, 0, 0);
 	XSetForeground(xInfo->display, gc, foreground);
 	XSetBackground(xInfo->display, gc, background);
 	XSetFillStyle(xInfo->display, gc, FillSolid);
 	XSetLineAttributes(xInfo->display, gc, 2, LineSolid, CapRound, JoinMiter);
-    XPoint points[terrain->size()];
-    for (int i = 0; i < terrain->size(); i++) {
-        TerrainPoint *point = terrain->at(i);
+    /*
+    XPoint points[terrain->path->size()];
+    for (int i = 0; i < terrain->path->size(); i++) {
+        TerrainPoint *point = terrain->path->at(i);
         points[i].x = point->getXCoordinate();
         points[i].y = point->getYCoordinate();
     }
-    XDrawLines(xInfo->display, xInfo->pixmap, gc, points, (int)terrain->size(), CoordModeOrigin);
+    XDrawLines(xInfo->display, xInfo->pixmap, gc, points, (int)terrain->path->size(), CoordModeOrigin);
+     */
+    for (int i = 0; i < terrain->size(); i++) {
+        TerrainSegment segment = terrain->at(i);
+        segment.draw(foreground, background);
+    }
+    
+    // draw landing pads:
+    /*
+    vector<LandingPad*>* landingPads = terrain->landingPads;
+    for (int i = 0; i < landingPads->size(); i++) {
+        LandingPad* landingPad = landingPads->at(i);
+        landingPad->draw();
+    }
+     */
 }
 
 TerrainRenderer::~TerrainRenderer() {

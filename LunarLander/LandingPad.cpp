@@ -8,11 +8,21 @@
 
 #include "LandingPad.h"
 
-LandingPad::LandingPad(int x, int y, int width, int height) {
-    this->x = x;
-    this->y = y;
-    this->width = width;
-    this->height = height;
+using namespace std;
+
+LandingPad::LandingPad() :DrawableObject() {
+    
+}
+
+LandingPad::LandingPad(TerrainPoint* p1, TerrainPoint* p2) {
+    this->p1 = p1;
+    this->p2 = p2;
+    
+    x = p1->getXCoordinate();
+    y = p1->getYCoordinate();
+    width = abs(p2->getXCoordinate() - p1->getXCoordinate());
+    height = 20;
+    xInfo = XInfo::instance(0, NULL);
 }
 
 void LandingPad::draw() {
@@ -20,12 +30,12 @@ void LandingPad::draw() {
     // draw slash:
     int horizontalSpace = (width / 10);
     for (int i = 0; i < 10; i++) {
-        XDrawLine(xInfo->display, xInfo->pixmap, xInfo->gc[0], i * space, y, (i + 1) * space, height);
+        XDrawLine(xInfo->display, xInfo->pixmap, xInfo->gc[0], x + i * horizontalSpace, y, x + (i + 1) * horizontalSpace, y + height);
     }
     
     // draw back-slash:
     for (int i = 0; i < 10; i++) {
-        XDrawLine(xInfo->display, xInfo->pixmap, xInfo->gc[0], (i + 1) * space, y, i * space, height);
+        XDrawLine(xInfo->display, xInfo->pixmap, xInfo->gc[0], x + (i + 1) * horizontalSpace, y, x + i * horizontalSpace, y + height);
     }
 }
 

@@ -14,8 +14,11 @@
 #include <vector>
 #include "TerrainPoint.h"
 #include "XInfo.h"
+#include "PathDefinition.h"
+#include "TerrainSegment.h"
 
 using namespace std;
+
 
 class TerrainGenerator {
 public:
@@ -23,14 +26,14 @@ public:
     TerrainGenerator();
     ~TerrainGenerator();
     
-    vector<TerrainPoint*>* createInitialTerrain();
+    vector<TerrainSegment>* createInitialTerrain();
     bool canShiftTerrainToRight();
     bool shouldCreateLeftTerrain();
     bool shouldCreateRightTerrain();
     
-    vector<TerrainPoint*>* getActiveTerrain();
-    vector<TerrainPoint*>* getLeftShiftedTerrain(double deltaX);
-    vector<TerrainPoint*>* getRightShiftedTerrain(double deltaX);
+    vector<TerrainSegment>* getActiveTerrain();
+    vector<TerrainSegment>* getLeftShiftedTerrain(double deltaX);
+    vector<TerrainSegment>* getRightShiftedTerrain(double deltaX);
     
 private:
     static TerrainGenerator* terrainGenerator;
@@ -42,19 +45,21 @@ private:
     
     int baseNumOfPath;
     int maxNumOfPath;
-    int numOfPath;
+    int numOfTerrainSegment;
     
     int baseLandingPadCount;
     int maxLandingPadCount;
     int landingPadCount;
     
-    vector<TerrainPoint*>* activeTerrain;
-    vector<TerrainPoint*>* leftInactiveTerrain;
-    vector<TerrainPoint*>* rightInactiveTerrain;
+    vector<TerrainSegment>* activeTerrain;
+    vector<TerrainSegment>* leftInactiveTerrain;
+    vector<TerrainSegment>* rightInactiveTerrain;
     
     vector<TerrainPoint*>* generateSubPath(TerrainPoint startPoint, TerrainPoint endPoint, int numOfPoints);
-    void shiftTerrain(vector<TerrainPoint*> *terrain, double deltaX);
-    void addTerrain(vector<TerrainPoint*> *terrain, int offSetToPreviousForFirstPoint);
+    void shiftTerrain(vector<TerrainSegment>* terrain, double deltaX);
+    vector<PathSpec> generatePathSpecs(int numOfPathSpec);
+    
+    void addTerrainSegments(vector<TerrainSegment>* terrain);
     
 };
 

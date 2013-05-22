@@ -4,16 +4,16 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "LunarLander/Spaceship.cpp"
-         timestampString = "390707513.165869"
+         filePath = "LunarLander/TerrainGenerator.cpp"
+         timestampString = "390891779.453227"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "91"
-         endingLineNumber = "91"
-         landmarkName = "Spaceship::Spaceship(int x, int y)"
+         startingLineNumber = "121"
+         endingLineNumber = "121"
+         landmarkName = "TerrainGenerator::generatePathSpecs(int numOfPathSpec)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -21,38 +21,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LunarLander/TerrainManager.cpp"
-         timestampString = "390703801.996957"
+         timestampString = "390891157.85683"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "74"
-         endingLineNumber = "74"
-         landmarkName = "TerrainManager::updateLeftTerrain(double deltaX)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "LunarLander/TerrainManager.cpp"
-         timestampString = "390703801.996957"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "69"
-         endingLineNumber = "69"
-         landmarkName = "TerrainManager::updateLeftTerrain(double deltaX)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "LunarLander/TerrainManager.cpp"
-         timestampString = "390703801.996957"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "60"
-         endingLineNumber = "60"
-         landmarkName = "TerrainManager::updateLeftTerrain(double deltaX)"
+         startingLineNumber = "84"
+         endingLineNumber = "84"
+         landmarkName = "TerrainManager::updateRightTerrain(double deltaX)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -60,12 +34,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LunarLander/TerrainGenerator.cpp"
-         timestampString = "390840997.581378"
+         timestampString = "390891779.453227"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "354"
-         endingLineNumber = "354"
-         landmarkName = "TerrainGenerator::getRightShiftedTerrain(double deltaX)"
+         startingLineNumber = "305"
+         endingLineNumber = "305"
+         landmarkName = "TerrainGenerator::getLeftShiftedTerrain(double deltaX)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -73,12 +47,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LunarLander/TerrainGenerator.cpp"
-         timestampString = "390840997.581378"
+         timestampString = "390892277.65056"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "363"
-         endingLineNumber = "363"
-         landmarkName = "TerrainGenerator::getRightShiftedTerrain(double deltaX)"
+         startingLineNumber = "310"
+         endingLineNumber = "310"
+         landmarkName = "TerrainGenerator::getLeftShiftedTerrain(double deltaX)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -86,11 +60,63 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LunarLander/TerrainGenerator.cpp"
-         timestampString = "390840997.581378"
+         timestampString = "390891779.453227"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "433"
-         endingLineNumber = "433"
+         startingLineNumber = "313"
+         endingLineNumber = "313"
+         landmarkName = "TerrainGenerator::getLeftShiftedTerrain(double deltaX)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "LunarLander/TerrainGenerator.cpp"
+         timestampString = "390891779.453227"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "317"
+         endingLineNumber = "317"
+         landmarkName = "TerrainGenerator::getLeftShiftedTerrain(double deltaX)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "LunarLander/TerrainGenerator.cpp"
+         timestampString = "390891779.453227"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "325"
+         endingLineNumber = "325"
+         landmarkName = "TerrainGenerator::getLeftShiftedTerrain(double deltaX)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "LunarLander/TerrainGenerator.cpp"
+         timestampString = "390892283.096114"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "311"
+         endingLineNumber = "311"
+         landmarkName = "TerrainGenerator::getLeftShiftedTerrain(double deltaX)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "LunarLander/TerrainGenerator.cpp"
+         timestampString = "390892563.371825"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "318"
+         endingLineNumber = "318"
          landmarkName = "TerrainGenerator::getLeftShiftedTerrain(double deltaX)"
          landmarkType = "5">
       </FileBreakpoint>

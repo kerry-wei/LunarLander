@@ -10,9 +10,9 @@
 #define __LunarLander__TerrainRenderer__
 
 #include <iostream>
-#include <vector>
 #include <X11/Xlib.h>
-#include "TerrainPoint.h"
+#include <vector>
+#include "TerrainSegment.h"
 
 using namespace std;
 
@@ -23,12 +23,12 @@ public:
     TerrainRenderer();
     ~TerrainRenderer();
     
-    void drawTerrain(vector<TerrainPoint*>* terrain);
-    void clearTerrain(vector<TerrainPoint*>* terrain);
+    void drawTerrain(vector<TerrainSegment>* terrain);
+    void clearTerrain(vector<TerrainSegment>* terrain);
     
 private:
     static TerrainRenderer* terrainRenderer;
-    void renderTerrain(vector<TerrainPoint*>* terrain, unsigned long foreground, unsigned long background);
+    void renderTerrain(vector<TerrainSegment>* terrain, unsigned long foreground, unsigned long background);
     
 };
 

@@ -20,7 +20,7 @@ public:
     ~CollisionDetector();
     
     bool collisionHappens(Spaceship* spaceship);
-    bool isLandingSuccessful(Spaceship* spaceship, LandingPad* landingPad);
+    //bool isLandingSuccessful(Spaceship* spaceship, LandingPad* landingPad);
     
 private:
     static CollisionDetector* collisionDetector;

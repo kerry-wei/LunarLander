@@ -17,7 +17,7 @@
 
 using namespace std;
 
-class Spaceship : DrawableObject {
+class Spaceship : public DrawableObject {
 public:
     Spaceship();
     Spaceship(int x, int y);

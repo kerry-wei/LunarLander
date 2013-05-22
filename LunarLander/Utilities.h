@@ -13,6 +13,7 @@
 #include <cstdlib>
 #include <vector>
 #include "TerrainPoint.h"
+#include "TerrainSegment.h"
 
 using namespace std;
 
@@ -22,7 +23,7 @@ public:
     static unsigned long now();
     static double nowInSeconds();
     static void printControlPoints(vector<TerrainPoint> controlPoints, int controlPointCount);
-    static void printTerrainPoint(vector<TerrainPoint*> *landingPoints);
+    static void printTerrain(vector<TerrainSegment> *terrain);
 };
 
 #endif /* defined(__LunarLander__Utilities__) */

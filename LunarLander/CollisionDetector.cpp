@@ -30,6 +30,7 @@ bool CollisionDetector::collisionHappens(Spaceship* spaceship) {
     
 }
 
+/*
 bool CollisionDetector::isLandingSuccessful(Spaceship* spaceship, LandingPad* landingPad) {
     int shipXPos = spaceship->getXPosition();
     int shipYPos = spaceship->getYPosition();
@@ -41,7 +42,7 @@ bool CollisionDetector::isLandingSuccessful(Spaceship* spaceship, LandingPad* la
     
     // TODO: speed too high cause crash
 }
-
+ */
 
 
 

@@ -35,12 +35,11 @@ void Utilities::printControlPoints(vector<TerrainPoint> controlPoints, int contr
     }
 }
 
-void Utilities::printTerrainPoint(vector<TerrainPoint*> *landingPoints) {
-    cout << "printTerrainPoint: " << endl;
-    for (int i = 0; i < landingPoints->size(); i++) {
-        TerrainPoint *point = landingPoints->at(i);
-        cout << "(" << point->getXCoordinate() << ", " << point->getYCoordinate() << ")"
-        << ", xOffsetToPrevious = " << point->getXOffsetToPrevious() << ", xOffsetToNext = " << point->getXOffsetToNext() << endl;
+void Utilities::printTerrain(vector<TerrainSegment> *terrain) {
+    cout << "printTerrain: " << endl;
+    for (int i = 0; i < terrain->size(); i++) {
+        TerrainSegment segment = terrain->at(i);
+        segment.printSegment();
     }
     cout << endl;
 }

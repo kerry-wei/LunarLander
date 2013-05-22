@@ -24,6 +24,7 @@
 		AAD5CEF1173EFA710015B6B9 /* EventLoopManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD5CEEF173EFA710015B6B9 /* EventLoopManager.cpp */; };
 		AAD5CEF4173EFC150015B6B9 /* XInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD5CEF2173EFC150015B6B9 /* XInfo.cpp */; };
 		AAD5CEF7173EFCFA0015B6B9 /* Utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD5CEF5173EFCFA0015B6B9 /* Utilities.cpp */; };
+		AAEC33BE174BF06400049E40 /* TerrainSegment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAEC33BC174BF06400049E40 /* TerrainSegment.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -84,6 +85,9 @@
 		AAD5CEF3173EFC150015B6B9 /* XInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XInfo.h; sourceTree = "<group>"; };
 		AAD5CEF5173EFCFA0015B6B9 /* Utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utilities.cpp; sourceTree = "<group>"; };
 		AAD5CEF6173EFCFA0015B6B9 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		AAEC33BC174BF06400049E40 /* TerrainSegment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TerrainSegment.cpp; sourceTree = "<group>"; };
+		AAEC33BD174BF06400049E40 /* TerrainSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainSegment.h; sourceTree = "<group>"; };
+		AAEC33BF174C626B00049E40 /* PathDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PathDefinition.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +172,9 @@
 				AA5337C6174BBEB2004C4EE2 /* CollisionDetector.h */,
 				AA5337C8174BC30E004C4EE2 /* LandingPad.cpp */,
 				AA5337C9174BC30E004C4EE2 /* LandingPad.h */,
+				AAEC33BC174BF06400049E40 /* TerrainSegment.cpp */,
+				AAEC33BD174BF06400049E40 /* TerrainSegment.h */,
+				AAEC33BF174C626B00049E40 /* PathDefinition.h */,
 			);
 			path = LunarLander;
 			sourceTree = "<group>";
@@ -239,6 +246,7 @@
 				AA6693BE1749BD13005A3019 /* WelcomeLayer.cpp in Sources */,
 				AA5337C7174BBEB2004C4EE2 /* CollisionDetector.cpp in Sources */,
 				AA5337CA174BC30E004C4EE2 /* LandingPad.cpp in Sources */,
+				AAEC33BE174BF06400049E40 /* TerrainSegment.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
