@@ -24,10 +24,10 @@
 
 EventLoopManager::EventLoopManager() {
     this->FPS = 30;
+    this->xInfo = XInfo::instance(0, NULL);
 }
 
 void EventLoopManager::handleQuitGame() {
-    XInfo *xInfo = XInfo::instance(0, NULL);
     cout << "Terminated normally." << endl;
     XCloseDisplay(xInfo->display);
 }
@@ -35,10 +35,10 @@ void EventLoopManager::handleQuitGame() {
 void EventLoopManager::handleStartGame() {
     GameSceneManager *gameSceneManager = GameSceneManager::instance();
     GameState *gameState = GameState::instance();
-    XInfo *xInfo = XInfo::instance(0, NULL);
+    
     XWindowAttributes windowAttr;
     XGetWindowAttributes(xInfo->display, xInfo->window, &windowAttr);
-    if (!gameState->isGameStarted()) {
+    if (!gameState->isGameStarted() || xInfo->windowSizeIsEnough()) {
         gameState->setGameStarted(true);
         gameSceneManager->removeWelcomeScreen();
         
@@ -55,36 +55,30 @@ void EventLoopManager::handleStartGame() {
 
 void EventLoopManager::handleResize(XInfo* xInfo, XEvent &event) {
 	XConfigureEvent xce = event.xconfigure;
-    GameState *gameState = GameState::instance();
 	fprintf(stderr, "Handling resize  w=%d  h=%d\n", xce.width, xce.height);
-    
-	if (xce.width > xInfo->desiredWidth && xce.height > xInfo->desiredHeight) {
-        gameState->setGameStarted(true);
+    GameSceneManager *gameSceneManager = GameSceneManager::instance();
+	if (xce.width > xInfo->getPixmapWidth() && xce.height > xInfo->getPixmapHeight()) {
         repositionPixmap(xce);
-	} else if (xce.width < xInfo->desiredWidth || xce.height < xInfo->desiredHeight) {
+        gameSceneManager->showWelcomeScreen();
+	} else if (xce.width < xInfo->getPixmapWidth() || xce.height < xInfo->getPixmapHeight()) {
         // flush everything, and show 'Too Small' message:
-
-        gameState->setGameStarted(false);
         
-        GameSceneManager *gameSceneManager = GameSceneManager::instance();
         gameSceneManager->showWindowTooSmallMessage();
     }
 }
 
 void EventLoopManager::repositionPixmap(XConfigureEvent xce) {
-    XInfo *xInfo = XInfo::instance(0, NULL);
-    
     // clear pixmap
     XFreePixmap(xInfo->display, xInfo->pixmap);
     int depth = DefaultDepth(xInfo->display, DefaultScreen(xInfo->display));
-    xInfo->pixmap = XCreatePixmap(xInfo->display, xInfo->window, xInfo->desiredWidth, xInfo->desiredHeight, depth);
+    xInfo->pixmap = XCreatePixmap(xInfo->display, xInfo->window, xInfo->getPixmapWidth(), xInfo->getPixmapHeight(), depth);
     
     // draw boundary
-    XDrawRectangle(xInfo->display, xInfo->pixmap, xInfo->gc[0], 0, 0, xInfo->desiredWidth, xInfo->desiredHeight);
+    XDrawRectangle(xInfo->display, xInfo->pixmap, xInfo->gc[0], 0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight());
     
     // re-position pixmap:
-    xInfo->pixmapXOffset = (xce.width - xInfo->desiredWidth) / 2;
-    xInfo->pixmapYOffset = (xce.height - xInfo->desiredHeight) / 2;
+    xInfo->pixmapXOffset = (xce.width - xInfo->getPixmapWidth()) / 2;
+    xInfo->pixmapYOffset = (xce.height - xInfo->getPixmapHeight()) / 2;
     
 }
 
@@ -93,7 +87,6 @@ void EventLoopManager::eventloop() {
     char text[BufferSize];
     unsigned long lastRepaint = 0;
     
-    XInfo *xInfo = XInfo::instance(0, NULL);
     XWindowAttributes windowAttr;
     XGetWindowAttributes(xInfo->display, xInfo->window, &windowAttr);
     
@@ -204,7 +197,7 @@ void EventLoopManager::eventloop() {
                                                  spaceship->getXSpeed(), spaceship->getYSpeed());
                 
                 XCopyArea(xInfo->display, xInfo->pixmap, xInfo->window, xInfo->gc[0],
-                          0, 0, xInfo->desiredWidth, xInfo->desiredHeight,  // region of pixmap to copy
+                          0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight(),  // region of pixmap to copy
                           xInfo->pixmapXOffset, xInfo->pixmapYOffset); // position to put top left corner of pixmap in window
                 //XFlush(xInfo->display);
                 

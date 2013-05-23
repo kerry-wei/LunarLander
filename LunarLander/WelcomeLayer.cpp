@@ -51,11 +51,12 @@ WelcomeLayer::WelcomeLayer() {
 
 
 void WelcomeLayer::drawWelcomeScreen() {
-    XWindowAttributes windowAttr;
-    XGetWindowAttributes(xInfo->display, xInfo->window, &windowAttr);
     GC gc = XCreateGC(xInfo->display, xInfo->window, 0, 0);
     XSetBackground(xInfo->display, gc, WhitePixel(xInfo->display, xInfo->screen));
     XSetForeground(xInfo->display, gc, BlackPixel(xInfo->display, xInfo->screen));
+    
+    int pixmapWidth = xInfo->getPixmapWidth();
+    int pixmapHeight = xInfo->getPixmapHeight();
     
     // font size: 8, 10, 12, 14, 18, 24
     XFontStruct *font = XLoadQueryFont(xInfo->display, "-*-helvetica-*-24-*");
@@ -63,25 +64,21 @@ void WelcomeLayer::drawWelcomeScreen() {
     
     string beginGame = "Press SPACE to start";
     int labelWidth = XTextWidth(font, beginGame.c_str(), (int)beginGame.length());
-    int xPosition = windowAttr.width / 2 - labelWidth / 2;
-    int yPosition = windowAttr.height / 2 - 100;
+    int xPosition = pixmapWidth / 2 - labelWidth / 2;
+    int yPosition = pixmapHeight / 2 - 100;
     XDrawImageString(xInfo->display, xInfo->pixmap, gc, xPosition, yPosition, beginGame.c_str(), (int)beginGame.length());
     
     string quitGame = "Press Q to quit";
     labelWidth = XTextWidth(font, quitGame.c_str(), (int)quitGame.length());
-    xPosition = windowAttr.width / 2 - labelWidth / 2;
-    yPosition = windowAttr.height / 2 + spaceBetweenMsg - 86;
+    xPosition = pixmapWidth / 2 - labelWidth / 2;
+    yPosition = pixmapHeight / 2 + spaceBetweenMsg - 86;
     XDrawImageString(xInfo->display, xInfo->pixmap, gc, xPosition, yPosition, quitGame.c_str(), (int)quitGame.length());
-    
-    /*
-    
-     */
     
     XFlush(xInfo->display);
 }
 
 void WelcomeLayer::clearWelcomeScreen() {
-    XFillRectangle(xInfo->display, xInfo->pixmap, xInfo->gc[1], 0, 0, xInfo->desiredWidth, xInfo->desiredHeight);
+    XFillRectangle(xInfo->display, xInfo->pixmap, xInfo->gc[1], 0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight());
     XClearWindow(xInfo->display, xInfo->window);
     updateGameInfo(0, 0.0, 0.0, 0.0, 0.0, 0.0);
 }

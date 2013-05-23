@@ -99,6 +99,20 @@ XInfo::XInfo (int argc, char *argv[]) {
     XFlush(this->display);
 }
 
+bool XInfo::windowSizeIsEnough() {
+    int windowWidth = getWindowWidth();
+    int windowHeight = getWindowHeight();
+    return (windowWidth >= desiredWidth && windowHeight >= desiredHeight);
+}
+
+int XInfo::getPixmapWidth() {
+    return desiredWidth;
+}
+
+int XInfo::getPixmapHeight() {
+    return desiredHeight;
+}
+
 int XInfo::getWindowWidth() {
     XWindowAttributes windowAttr;
     XGetWindowAttributes(xInfo->display, xInfo->window, &windowAttr);

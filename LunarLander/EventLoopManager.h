@@ -21,6 +21,7 @@ public:
     
 private:
     int FPS;
+    XInfo* xInfo;
     void handleQuitGame();
     void handleStartGame();
     void handleResize(XInfo* xInfo, XEvent &event);

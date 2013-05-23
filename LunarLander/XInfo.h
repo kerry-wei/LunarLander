@@ -16,6 +16,9 @@ class XInfo {
 public:
     static XInfo* instance(int argc, char *argv[]);
     
+    bool windowSizeIsEnough();
+    int getPixmapWidth();
+    int getPixmapHeight();
     int getWindowWidth();
     int getWindowHeight();
     
@@ -24,15 +27,15 @@ public:
 	int		 screen;
 	Window	 window;
     Pixmap	pixmap;
-    int desiredWidth;
-    int desiredHeight;
+    
     int pixmapXOffset;
     int pixmapYOffset;
     GC gc[2];
     
 private:
     static XInfo *xInfo;
-    
+    int desiredWidth;
+    int desiredHeight;
 };
 
 #endif /* defined(__LunarLander__XInfo__) */

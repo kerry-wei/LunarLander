@@ -29,12 +29,12 @@ GameSceneManager::GameSceneManager() {
 
 void GameSceneManager::showWelcomeScreen() {
     XInfo *xInfo = XInfo::instance(0, NULL);
-    XFillRectangle(xInfo->display, xInfo->pixmap, xInfo->gc[1], 0, 0, xInfo->desiredWidth, xInfo->desiredHeight);
+    XFillRectangle(xInfo->display, xInfo->pixmap, xInfo->gc[1], 0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight());
     welcomeLayer.updateGameInfo(0, 0.0, 0.0, 0.0, 0.0, 0.0);
     welcomeLayer.drawWelcomeScreen();
     XCopyArea(xInfo->display, xInfo->pixmap, xInfo->window, xInfo->gc[0],
-              0, 0, xInfo->desiredWidth, xInfo->desiredHeight,  // region of pixmap to copy
-              0, 0); // position to put top left corner of pixmap in window
+              0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight(),  // region of pixmap to copy
+              xInfo->pixmapXOffset, xInfo->pixmapYOffset); // position to put top left corner of pixmap in window
     XFlush(xInfo->display);
 }
 
