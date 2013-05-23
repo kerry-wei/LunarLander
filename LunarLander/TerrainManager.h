@@ -19,7 +19,7 @@ public:
     static TerrainManager* instance();
     TerrainManager();
     ~TerrainManager();
-    
+    void resetTerrain();
     bool shouldUpdateTerrain(double x, double y);
     void updateTerrainBasedOnSpaceshipPosition(Spaceship *spaceship, double deltaX, double deltaY);
     

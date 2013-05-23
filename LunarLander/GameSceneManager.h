@@ -19,8 +19,10 @@ public:
     GameSceneManager();
     ~GameSceneManager();
     
+    void clearScreen();
     void showWelcomeScreen();
     void removeWelcomeScreen();
+    void showSpaceshipCrashScreen();
     void showWindowTooSmallMessage();
     void updateGameInfo(int score, double time, double fuel, double altitude, double xSpeed, double ySpeed);
     
@@ -28,6 +30,7 @@ public:
 private:
     static GameSceneManager* gameSceneManager;
     WelcomeLayer welcomeLayer;
+    XInfo *xInfo;
 };
 
 #endif /* defined(__LunarLander__GameSceneManager__) */

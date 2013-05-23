@@ -14,6 +14,7 @@
 #include <cstdlib>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <cmath>
 
 
@@ -68,8 +69,6 @@ Spaceship::Spaceship(int x, int y) : DrawableObject(x, y) {
            &y_hot_return
         );
         
-        //cout << "pixmap = " << animations->at(i - 1) << endl;
-        
         switch (result) {
             case BitmapOpenFailed:
                 fprintf(stderr, "XReadBitmapFile - could not open file '%s'.\n", fileName);
@@ -98,6 +97,17 @@ Spaceship::Spaceship(int x, int y) : DrawableObject(x, y) {
         //cout << "width = " << width << ", height = " << height << endl;
         
     }
+}
+
+void Spaceship::reset() {
+    initialX = 150;
+    initialY = 10;
+    xSpeed = 0.0;
+    ySpeed = 0.0;
+    xSpeedLimit = 3.0;
+    ySpeedLimit = 3.0;
+    
+    animationFrameIndex = 0;
 }
 
 void Spaceship::move(int deltaX, int deltaY) {
@@ -140,7 +150,7 @@ void Spaceship:: playAnimation() {
 }
 
 void Spaceship::timerUpdate() {
-    //ySpeed += 0.012;
+    ySpeed += 0.012;
     
     // cout << "xSpeed = " << xSpeed << ", ySpeed = " << ySpeed << endl;
     
@@ -156,29 +166,19 @@ void Spaceship::setXSpeed(double delta) {
     }
 }
 void Spaceship::setYSpeed(double delta) {
-    cout << "before: y = " << ySpeed << ", delta = " << delta << endl;
+    //cout << "before: y = " << ySpeed << ", delta = " << delta << endl;
     
     ySpeed += delta;
     
-    cout << "after: y = " << ySpeed << ", delta = " << delta << endl;
+    //cout << "after: y = " << ySpeed << ", delta = " << delta << endl;
     
     if (ySpeed > abs(ySpeedLimit)) {
         ySpeed = ySpeed > 0.0 ? ySpeedLimit : (0.0 - ySpeedLimit);
     }
     
-    cout << "after abs: y = " << ySpeed << ", delta = " << delta << endl;
+    //cout << "after abs: y = " << ySpeed << ", delta = " << delta << endl;
     
 }
-
-/*
-int Spaceship::getXPosition() {
-    return x;
-}
-
-int Spaceship::getYPosition() {
-    return y;
-}
- */
 
 bool Spaceship::isMovingLeft() {
     return xSpeed < 0;

@@ -51,15 +51,13 @@ WelcomeLayer::WelcomeLayer() {
 
 
 void WelcomeLayer::drawWelcomeScreen() {
-    GC gc = XCreateGC(xInfo->display, xInfo->window, 0, 0);
-    XSetBackground(xInfo->display, gc, WhitePixel(xInfo->display, xInfo->screen));
-    XSetForeground(xInfo->display, gc, BlackPixel(xInfo->display, xInfo->screen));
+    GC gc = xInfo->gc[0];
     
     int pixmapWidth = xInfo->getPixmapWidth();
     int pixmapHeight = xInfo->getPixmapHeight();
     
     // font size: 8, 10, 12, 14, 18, 24
-    XFontStruct *font = XLoadQueryFont(xInfo->display, "-*-helvetica-*-24-*");
+    XFontStruct *font = XLoadQueryFont(xInfo->display, "12x24");
     XSetFont(xInfo->display, gc, font->fid);
     
     string beginGame = "Press SPACE to start";
@@ -79,34 +77,31 @@ void WelcomeLayer::drawWelcomeScreen() {
 
 void WelcomeLayer::clearWelcomeScreen() {
     XFillRectangle(xInfo->display, xInfo->pixmap, xInfo->gc[1], 0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight());
+    XFreePixmap(xInfo->display, xInfo->pixmap);
+    int depth = DefaultDepth(xInfo->display, DefaultScreen(xInfo->display));
+    xInfo->pixmap = XCreatePixmap(xInfo->display, xInfo->window, xInfo->getPixmapWidth(), xInfo->getPixmapHeight(), depth);
+    
     XClearWindow(xInfo->display, xInfo->window);
     updateGameInfo(0, 0.0, 0.0, 0.0, 0.0, 0.0);
 }
 
 void WelcomeLayer::updateGameInfo(int score, double time, double fuel, double altitude, double xSpeed, double ySpeed) {
     //cout << "score: " << score << ", time: " << time << ", fuel: " << fuel << ", altitude: " << altitude << ", xSpeed: " << xSpeed << ", ySpeed:" << ySpeed << endl;
-    
-    if (ySpeed > 0 && ySpeed < 0.001) {
-        cout << "" << endl;
-    }
-    
     XWindowAttributes windowAttr;
     XGetWindowAttributes(xInfo->display, xInfo->window, &windowAttr);
     GC gc = XCreateGC(xInfo->display, xInfo->window, 0, 0);
     XSetBackground(xInfo->display, gc, WhitePixel(xInfo->display, xInfo->screen));
     XSetForeground(xInfo->display, gc, BlackPixel(xInfo->display, xInfo->screen));
-    XFontStruct *font = XLoadQueryFont(xInfo->display, "-*-helvetica-*-12-*");
-    XSetFont(xInfo->display, gc, font->fid);
-    
+    XFontStruct *font = XLoadQueryFont(xInfo->display, "12x24");
+    XSetFont(xInfo->display, xInfo->gc[0], font->fid);
     string numToString;
     ostringstream convert;
-    
     int direction_return;
     int font_ascent_return, font_descent_return;
     XCharStruct overall_return;
-    
     // left side:
     //XClearArea(xInfo->display, xInfo->pixmap, scoreLabelXPos, scoreLabelYPos - scoreLabelHeight, scoreLabelWidth, scoreLabelHeight, false);
+    
     string scoreMsg = "SCORE: ";
     convert.clear();
     convert.str("");

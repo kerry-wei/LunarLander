@@ -11,6 +11,9 @@
 
 #include <iostream>
 #include "XInfo.h"
+#include "GameSceneManager.h"
+#include "GameState.h"
+#include "GameObjectManager.h"
 
 using namespace std;
 
@@ -22,8 +25,13 @@ public:
 private:
     int FPS;
     XInfo* xInfo;
+    GameSceneManager* gameSceneManager;
+    GameState* gameState;
+    GameObjectManager* gameObjManager;
+    
     void handleQuitGame();
     void handleStartGame();
+    void handleSpaceshipCrash();
     void handleResize(XInfo* xInfo, XEvent &event);
     void repositionPixmap(XConfigureEvent xce);
 };

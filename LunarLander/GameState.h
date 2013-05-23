@@ -21,11 +21,14 @@ public:
     ~GameState();
     
     bool isGameStarted();
-    void setGameStarted(bool started);
+    void pauGame();
+    void startGame();
     
 private:
     static GameState *gameState;
     bool gameStarted;
+    
+    void setGameStarted(bool started);
 };
 
 #endif /* defined(__LunarLander__GameState__) */

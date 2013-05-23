@@ -36,6 +36,10 @@ int TerrainManager::getXLeftLimit() {
 }
  */
 
+void TerrainManager::resetTerrain() {
+    terrainGenerator->resetAllTerrain();
+}
+
 bool TerrainManager::shouldUpdateTerrain(double x, double y) {
     if ((x <= xLeftLimit && terrainGenerator->canShiftTerrainToRight()) || x >= xRightLimit) {
         return true;
@@ -64,15 +68,6 @@ void TerrainManager::updateLeftTerrain(double deltaX) {
     terrainRenderer->clearTerrain(currentTerrain);
     
     vector<TerrainSegment*>* activeTerrain = terrainGenerator->getRightShiftedTerrain(deltaX);
-    
-    // debug:
-    /*
-    cout << "going to print shifted active terrain:" << endl;
-    Utilities::printTerrainPoint(activeTerrain);
-    cout << endl << endl;
-     */
-    // end
-    
     terrainRenderer->drawTerrain(activeTerrain);
 }
 

@@ -60,6 +60,12 @@ void TerrainGenerator::shiftTerrain(vector<TerrainSegment*>* terrain, double del
     }
 }
 
+void TerrainGenerator::resetAllTerrain() {
+    resetTerrain(activeTerrain);
+    resetTerrain(leftInactiveTerrain);
+    resetTerrain(rightInactiveTerrain);
+}
+
 vector<TerrainSegment*>* TerrainGenerator::createInitialTerrain() {
     addTerrainSegments(activeTerrain);
     return activeTerrain;
@@ -82,6 +88,10 @@ vector<PathSpec> TerrainGenerator::generatePathSpecs(int numOfPathSpec) {
         pathSpecs.push_back(pathSpec);
     }
     return pathSpecs;
+}
+
+void TerrainGenerator::resetTerrain(vector<TerrainSegment*>* terrain) {
+    terrain->clear();
 }
 
 void TerrainGenerator::addTerrainSegments(vector<TerrainSegment*>* terrain) {
@@ -208,6 +218,18 @@ bool TerrainGenerator::shouldCreateLeftTerrain() {
 bool TerrainGenerator::shouldCreateRightTerrain() {
     if (!rightInactiveTerrain) return false;
     return rightInactiveTerrain->empty();
+}
+
+TerrainSegment* TerrainGenerator::getTerrainSegmentBasedOnX(int xPos) {
+    for (int i = 0; i < activeTerrain->size(); i++) {
+        TerrainSegment* segment = activeTerrain->at(i);
+        int leftmostX = segment->getLeftmostXCoordinate();
+        int rightmostX = segment->getRightmostXCoordinate();
+        if (xPos >= leftmostX && xPos <= rightmostX) {
+            return segment;
+        }
+    }
+    return NULL;
 }
 
 vector<TerrainSegment*>* TerrainGenerator::getActiveTerrain() {

@@ -20,6 +20,8 @@ public:
     void move(int deltaX, int deltaY);
     int getXPosition();
     int getYPosition();
+    int getWidth();
+    int getHeight();
     virtual void draw();
     
     void clearDrawing();

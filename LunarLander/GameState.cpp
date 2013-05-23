@@ -37,6 +37,14 @@ bool GameState::isGameStarted() {
     return gameStarted;
 }
 
+void GameState::pauGame() {
+    gameStarted = false;
+}
+
+void GameState::startGame() {
+    gameStarted = true;
+}
+
 void GameState::setGameStarted(bool started) {
     gameStarted = started;
 }

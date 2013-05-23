@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include "TerrainManager.h"
-#include "LandingPad.h"
+#include "TerrainSegment.h"
 
 class CollisionDetector {
 public:
@@ -19,12 +19,14 @@ public:
     CollisionDetector();
     ~CollisionDetector();
     
-    bool collisionHappens(Spaceship* spaceship);
-    //bool isLandingSuccessful(Spaceship* spaceship, LandingPad* landingPad);
+    bool spaceshipCrashWillHappen();
+    bool isLandingSuccessful(Spaceship* spaceship, TerrainSegment* landingPad);
     
 private:
     static CollisionDetector* collisionDetector;
     TerrainManager* terrainManager;
+    
+    bool collisionHappens(Spaceship* spaceship, TerrainSegment* segment);
 };
 
 #endif /* defined(__LunarLander__CollisionDetector__) */

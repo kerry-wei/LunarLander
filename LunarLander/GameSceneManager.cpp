@@ -24,11 +24,19 @@ GameSceneManager* GameSceneManager::instance() {
 
 
 GameSceneManager::GameSceneManager() {
+    xInfo = XInfo::instance(0, NULL);
     welcomeLayer = WelcomeLayer();
 }
 
+void GameSceneManager::clearScreen() {
+    XFillRectangle(xInfo->display, xInfo->pixmap, xInfo->gc[1], 0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight());
+    XFlush(xInfo->display);
+    XFreePixmap(xInfo->display, xInfo->pixmap);
+    int depth = DefaultDepth(xInfo->display, DefaultScreen(xInfo->display));
+    xInfo->pixmap = XCreatePixmap(xInfo->display, xInfo->window, xInfo->getPixmapWidth(), xInfo->getPixmapHeight(), depth);
+}
+
 void GameSceneManager::showWelcomeScreen() {
-    XInfo *xInfo = XInfo::instance(0, NULL);
     XFillRectangle(xInfo->display, xInfo->pixmap, xInfo->gc[1], 0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight());
     welcomeLayer.updateGameInfo(0, 0.0, 0.0, 0.0, 0.0, 0.0);
     welcomeLayer.drawWelcomeScreen();
@@ -42,6 +50,27 @@ void GameSceneManager::removeWelcomeScreen() {
     welcomeLayer.clearWelcomeScreen();
 }
 
+void GameSceneManager::showSpaceshipCrashScreen() {
+    clearScreen();
+    welcomeLayer.updateGameInfo(0, 0.0, 0.0, 0.0, 0.0, 0.0);
+    
+    GC gc = xInfo->gc[0];
+    XFontStruct *font = XLoadQueryFont(xInfo->display, "12x24");
+    XSetFont(xInfo->display, gc, font->fid);
+    
+    string beginGame = "Spaceship Crashes...";
+    int labelWidth = XTextWidth(font, beginGame.c_str(), (int)beginGame.length());
+    int xPosition = xInfo->getPixmapWidth() / 2 - labelWidth / 2;
+    int yPosition = xInfo->getPixmapHeight() / 2;
+    XDrawImageString(xInfo->display, xInfo->pixmap, gc, xPosition, yPosition, beginGame.c_str(), (int)beginGame.length());
+    
+    
+    XCopyArea(xInfo->display, xInfo->pixmap, xInfo->window, xInfo->gc[0],
+              0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight(),  // region of pixmap to copy
+              xInfo->pixmapXOffset, xInfo->pixmapYOffset); // position to put top left corner of pixmap in window
+    XFlush(xInfo->display);
+}
+
 void GameSceneManager::showWindowTooSmallMessage() {
     XInfo *xInfo = XInfo::instance(0, NULL);
     XWindowAttributes windowAttr;
@@ -51,7 +80,7 @@ void GameSceneManager::showWindowTooSmallMessage() {
     XSetForeground(xInfo->display, gc, BlackPixel(xInfo->display, xInfo->screen));
     
     // font size: 8, 10, 12, 14, 18, 24
-    XFontStruct *font = XLoadQueryFont(xInfo->display, "-*-helvetica-*-24-*");
+    XFontStruct *font = XLoadQueryFont(xInfo->display, "12x24");
     XSetFont(xInfo->display, gc, font->fid);
     
     string beginGame = "Window Size Too Small";

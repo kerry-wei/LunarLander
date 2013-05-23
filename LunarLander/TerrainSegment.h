@@ -29,6 +29,7 @@ public:
     void updateRightmostPosition(TerrainPoint point);
     void updateLeftmostPosition(TerrainPoint point);
     void updateSegmentPosition();
+    vector<TerrainPoint> getBoundaryPoints(int x);
     TerrainPoint getLeftmostPoint();
     TerrainPoint getRightmostPoint();
     int getLeftmostXCoordinate();

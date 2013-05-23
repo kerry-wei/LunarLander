@@ -31,6 +31,9 @@ GameObjectManager* GameObjectManager::instance() {
     }
 }
 
+void GameObjectManager::resetSpaceship() {
+    spaceship->reset();
+}
 
 Spaceship* GameObjectManager::getSpaceship() {
     return spaceship;

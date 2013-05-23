@@ -7,6 +7,8 @@
 //
 
 #include "TerrainSegment.h"
+#include <stdlib.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -87,6 +89,20 @@ void TerrainSegment::updateSegmentPosition() {
     y = p1.getYCoordinate();
 }
 
+vector<TerrainPoint> TerrainSegment::getBoundaryPoints(int x) {
+    vector<TerrainPoint> ans = vector<TerrainPoint>();
+    for (int i = 0; i < segmentPath.size() - 1; i++) {
+        TerrainPoint p1 = segmentPath.at(i);
+        TerrainPoint p2 = segmentPath.at(i + 1);
+        if (x >= p1.getXCoordinate() && x <= p2.getXCoordinate()) {
+            ans.push_back(p1);
+            ans.push_back(p2);
+            return ans;
+        }
+    }
+    return ans;
+}
+
 TerrainPoint TerrainSegment::getLeftmostPoint() {
     return segmentPath.at(0);
 }
@@ -118,7 +134,7 @@ void TerrainSegment::clearSegment() {
 }
 
 void TerrainSegment::draw(unsigned long foreground, unsigned long background) {
-    GC gc = XCreateGC(xInfo->display, xInfo->window, 0, 0);
+    GC gc = XCreateGC(xInfo->display, xInfo->pixmap, 0, 0);
 	XSetForeground(xInfo->display, gc, foreground);
 	XSetBackground(xInfo->display, gc, background);
 	XSetFillStyle(xInfo->display, gc, FillSolid);

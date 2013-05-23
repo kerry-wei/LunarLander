@@ -21,6 +21,7 @@ class Spaceship : public DrawableObject {
 public:
     Spaceship();
     Spaceship(int x, int y);
+    void reset();
     
     void move(int deltaX, int deltaY);
     void moveToInitialPosition();

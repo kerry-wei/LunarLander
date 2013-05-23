@@ -19,6 +19,7 @@ public:
     static void init();
     static GameObjectManager* instance();
     Spaceship* getSpaceship();
+    void resetSpaceship();
     ~GameObjectManager();
     
     void timerUpdate();

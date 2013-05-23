@@ -47,6 +47,14 @@ int DrawableObject::getYPosition() {
     return y;
 }
 
+int DrawableObject::getWidth() {
+    return width;
+}
+
+int DrawableObject::getHeight() {
+    return height;
+}
+
 void DrawableObject::draw() {
     
 }

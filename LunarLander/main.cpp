@@ -26,15 +26,7 @@ int main(int argc, char** argv) {
     GameSceneManager *gameSceneManager = GameSceneManager::instance();
     gameSceneManager->showWelcomeScreen();
     
-    
-    // tmp: create spaceship here
-    GameObjectManager *gameObjManager = GameObjectManager::instance();
-    Spaceship *spaceship = gameObjManager->getSpaceship();
-    spaceship->draw();
-    // end
-    
     EventLoopManager eventLoopManager = EventLoopManager();
     eventLoopManager.eventloop();
     
 }
-

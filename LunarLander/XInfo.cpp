@@ -8,6 +8,7 @@
 
 #include "XInfo.h"
 #include <iostream>
+#include <stdlib.h>
 using namespace std;
 
 
