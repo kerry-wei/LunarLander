@@ -10,10 +10,10 @@
 
 using namespace std;
 
-TerrainSegment::TerrainSegment(TerrainPoint p1, TerrainPoint p2, PathSpec pathSpec, int numOfPoints) {
+TerrainSegment::TerrainSegment(TerrainPoint p1, TerrainPoint p2, PathSpec pathSpec, int numOfPoints) :
+    DrawableObject(p1.getXCoordinate(), p1.getYCoordinate(), abs(p2.getXCoordinate() - p1.getXCoordinate()), abs(p2.getYCoordinate() - p1.getYCoordinate())) {
     this->pathSpec = pathSpec;
     this->xInfo = XInfo::instance(0, NULL);
-    //this->numOfPoints = numOfPoints;
     
     this->generateSegment(p1, p2, pathSpec, numOfPoints);
     this->updateXOffsets();
@@ -47,28 +47,52 @@ void TerrainSegment::shiftTerrainSegment(double deltaX) {
         int xCoordinate = point.getXCoordinate();
         point.setXCoordinate(xCoordinate - deltaX);
     }
+    updateSegmentPosition();
 }
 
-void TerrainSegment::updateRightmostPosition(int rightmostX) {
+void TerrainSegment::updateRightmostPosition(TerrainPoint point) {
     TerrainPoint &rightmostPoint = segmentPath.at(segmentPath.size() - 1);
-    rightmostPoint.setXCoordinate(rightmostX);
+    rightmostPoint.setXCoordinate(point.getXCoordinate());
+    //rightmostPoint.setYCoordinate(point.getYCoordinate());
+    
     // update x-coordinate of the rest of points
     for (int i = (segmentPath.size() - 2 > 0 ? (int)segmentPath.size() - 2 : 0); i >= 0; i--) {
         TerrainPoint &currentPoint = segmentPath.at(i);
         TerrainPoint &nextPoint = segmentPath.at(i + 1);
         currentPoint.setXCoordinate(nextPoint.getXCoordinate() - nextPoint.getXOffsetToPrevious());
     }
+    
+    updateSegmentPosition();
 }
 
-void TerrainSegment::updateLeftmostPosition(int leftmostX) {
+void TerrainSegment::updateLeftmostPosition(TerrainPoint point) {
     TerrainPoint &leftmostPoint = segmentPath.at(0);
-    leftmostPoint.setXCoordinate(leftmostX);
+    leftmostPoint.setXCoordinate(point.getXCoordinate());
+    //leftmostPoint.setYCoordinate(point.getYCoordinate());
+    
     // update x-coordinate of the rest of points
     for (int i = 1; i < segmentPath.size(); i++) {
         TerrainPoint &currentPoint = segmentPath.at(i);
         TerrainPoint &previousPoint = segmentPath.at(i - 1);
         currentPoint.setXCoordinate(previousPoint.getXCoordinate() + previousPoint.getXOffsetToNext());
     }
+    
+    updateSegmentPosition();
+}
+
+void TerrainSegment::updateSegmentPosition() {
+    // update position:
+    TerrainPoint p1 = segmentPath.at(0);
+    x = p1.getXCoordinate();
+    y = p1.getYCoordinate();
+}
+
+TerrainPoint TerrainSegment::getLeftmostPoint() {
+    return segmentPath.at(0);
+}
+
+TerrainPoint TerrainSegment::getRightmostPoint() {
+    return segmentPath.at(segmentPath.size() - 1);
 }
 
 int TerrainSegment::getLeftmostXCoordinate() {

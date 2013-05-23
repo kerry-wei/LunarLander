@@ -32,9 +32,9 @@ TerrainGenerator::TerrainGenerator() {
     int windowWidth = xInfo->getWindowWidth();
     int windowHeight = xInfo->getWindowHeight();
     
-    this->activeTerrain = new vector<TerrainSegment>();
-    this->leftInactiveTerrain = new vector<TerrainSegment>();
-    this->rightInactiveTerrain = new vector<TerrainSegment>();
+    this->activeTerrain = new vector<TerrainSegment*>();
+    this->leftInactiveTerrain = new vector<TerrainSegment*>();
+    this->rightInactiveTerrain = new vector<TerrainSegment*>();
     
     this->minFlyingSpace = 300;
     this->windowWidth = windowWidth;
@@ -53,58 +53,14 @@ TerrainGenerator::TerrainGenerator() {
     
 }
 
-
-// NOTE: xOffsetToPrevious and xOffsetToNext are not complete
-vector<TerrainPoint*>* TerrainGenerator::generateSubPath(TerrainPoint startPoint, TerrainPoint endPoint, int numOfPoints) {
-    vector<TerrainPoint*>* subPath = new vector<TerrainPoint*>(numOfPoints);
-    
-    bool isUpwardPath = TerrainPoint::isUpwardPath(startPoint, endPoint);
-    
-    int xCoordinates[numOfPoints];
-    int yCoordinates[numOfPoints];
-    for (int i = 0; i < numOfPoints; i++) {
-        xCoordinates[i] = startPoint.getXCoordinate() + rand() % (endPoint.getXCoordinate() - startPoint.getXCoordinate());
-    }
-    for (int i = 0; i < numOfPoints; i++) {
-        int randomDiff = rand() % (startPoint.getYCoordinate() == endPoint.getYCoordinate() ? 50 : abs(startPoint.getYCoordinate() - endPoint.getYCoordinate()));
-        short yCoordinate = !isUpwardPath ? (startPoint.getYCoordinate() + randomDiff) : (startPoint.getYCoordinate() - randomDiff);
-        
-        yCoordinates[i] = yCoordinate;
-    }
-    
-    // sort x-coordiantes:
-    sort(xCoordinates, xCoordinates + numOfPoints);
-    
-    // sort y-coordinates: std::greater<int>()
-    if (isUpwardPath) {
-        sort(yCoordinates, yCoordinates + numOfPoints, greater<int>());
-    } else {
-        sort(yCoordinates, yCoordinates + numOfPoints);
-    }
-    
-    // add middle points:
-    for (int i = 0; i < numOfPoints; i++) {
-        int xPos = xCoordinates[i];
-        int yPos = yCoordinates[i];
-        int offsetToPrevious = (i == 0) ? (xPos - startPoint.getXCoordinate()) : (xPos - xCoordinates[i - 1]);
-        int offsetToNext = (i == numOfPoints - 1) ? (endPoint.getXCoordinate() - yPos) : (xCoordinates[i + 1] - xPos);
-        
-        TerrainPoint *point = new TerrainPoint(xPos, yPos, offsetToPrevious, offsetToNext);
-        
-        subPath->at(i) = point;
-    }
-    
-    return subPath;
-}
-
-void TerrainGenerator::shiftTerrain(vector<TerrainSegment>* terrain, double deltaX) {
+void TerrainGenerator::shiftTerrain(vector<TerrainSegment*>* terrain, double deltaX) {
     for (int i = 0; i < terrain->size(); i++) {
-        TerrainSegment& segment = terrain->at(i);
-        segment.shiftTerrainSegment(deltaX);
+        TerrainSegment* segment = terrain->at(i);
+        segment->shiftTerrainSegment(deltaX);
     }
 }
 
-vector<TerrainSegment>* TerrainGenerator::createInitialTerrain() {
+vector<TerrainSegment*>* TerrainGenerator::createInitialTerrain() {
     addTerrainSegments(activeTerrain);
     return activeTerrain;
 }
@@ -128,7 +84,7 @@ vector<PathSpec> TerrainGenerator::generatePathSpecs(int numOfPathSpec) {
     return pathSpecs;
 }
 
-void TerrainGenerator::addTerrainSegments(vector<TerrainSegment>* terrain) {
+void TerrainGenerator::addTerrainSegments(vector<TerrainSegment*>* terrain) {
     // generate path specifications:
     vector<PathSpec> pathSpecs = generatePathSpecs(numOfTerrainSegment);
     
@@ -146,7 +102,7 @@ void TerrainGenerator::addTerrainSegments(vector<TerrainSegment>* terrain) {
     const int upPathUpperLimit = 400;
     const int upPathLowerLimit = 200;
     
-    int numOfControlPoints = numOfTerrainSegment + 1;
+    // int numOfControlPoints = numOfTerrainSegment + 1;
     vector<TerrainPoint> controlPoints =  vector<TerrainPoint>();//[numOfControlPoints];
     
     // generate control points:
@@ -224,9 +180,17 @@ void TerrainGenerator::addTerrainSegments(vector<TerrainSegment>* terrain) {
         TerrainPoint startPoint = controlPoints[i];
         TerrainPoint endPoint = controlPoints[i + 1];
         PathSpec spec = pathSpecs.at(i);
-        int numOfPoints = (spec.slope == Horizontal ? 2 : 12);
-        TerrainSegment subPath = TerrainSegment(startPoint, endPoint, spec, numOfPoints);
-        terrain->push_back(subPath);
+        
+        if (spec.slope == Horizontal) {
+            // create LandingPad obj
+            LandingPad* landingPad = new LandingPad(startPoint, endPoint, spec);
+            terrain->push_back(landingPad);
+        } else {
+            // create TerrainSegment obj
+            TerrainSegment* subPath = new TerrainSegment(startPoint, endPoint, spec, 12);
+            terrain->push_back(subPath);
+        }
+        
     }
     
 }
@@ -246,32 +210,31 @@ bool TerrainGenerator::shouldCreateRightTerrain() {
     return rightInactiveTerrain->empty();
 }
 
-vector<TerrainSegment>* TerrainGenerator::getActiveTerrain() {
+vector<TerrainSegment*>* TerrainGenerator::getActiveTerrain() {
     return activeTerrain;
 }
 
-vector<TerrainSegment>* TerrainGenerator::getRightShiftedTerrain(double deltaX) {
+vector<TerrainSegment*>* TerrainGenerator::getRightShiftedTerrain(double deltaX) {
     shiftTerrain(activeTerrain, deltaX);
     
     // if second last segment is off-screen, move it to rightInactiveTerrain
-    TerrainSegment lastSegment = activeTerrain->at(activeTerrain->size() - 1);
-    if (lastSegment.isOffScreen()) {
+    TerrainSegment* lastSegment = activeTerrain->at(activeTerrain->size() - 1);
+    if (lastSegment->isOffScreen()) {
         rightInactiveTerrain->insert(rightInactiveTerrain->begin(), lastSegment);
         activeTerrain->erase(activeTerrain->end() - 1);
     }
     
     // insert new point to the beginning, if necessary
-    TerrainSegment firstSegment = activeTerrain->at(0);
-    if (firstSegment.isCompletelyInsideScreen()) {
+    TerrainSegment* firstSegment = activeTerrain->at(0);
+    if (firstSegment->isCompletelyInsideScreen()) {
         if (!leftInactiveTerrain || leftInactiveTerrain->empty()) {
             Utilities::reportError("ERROR: left inactive terrian should NOT be NULL or empty");
             return NULL;
         }
         
         // pop last element of left inactive terrain, and push it to the beginning of current terrain
-        TerrainSegment lastLeftInactiveSegment = leftInactiveTerrain->at(leftInactiveTerrain->size() - 1);
-        lastLeftInactiveSegment.updateRightmostPosition(firstSegment.getLeftmostXCoordinate());
-        //firstActivePoint->setXOffsetToPrevious(lastLeftInactivePoint->getXOffsetToNext());
+        TerrainSegment* lastLeftInactiveSegment = leftInactiveTerrain->at(leftInactiveTerrain->size() - 1);
+        lastLeftInactiveSegment->updateRightmostPosition(firstSegment->getLeftmostPoint());
         activeTerrain->insert(activeTerrain->begin(), lastLeftInactiveSegment);
         leftInactiveTerrain->pop_back();
     }
@@ -279,44 +242,37 @@ vector<TerrainSegment>* TerrainGenerator::getRightShiftedTerrain(double deltaX) 
     return activeTerrain;
 }
 
-vector<TerrainSegment>* TerrainGenerator::getLeftShiftedTerrain(double deltaX) {
+vector<TerrainSegment*>* TerrainGenerator::getLeftShiftedTerrain(double deltaX) {
     // debug:
-    cout << "before shift:" << endl;
+    //cout << "before shift:" << endl;
     //Utilities::printTerrain(activeTerrain);
     // end
     
     shiftTerrain(activeTerrain, deltaX);
     
-    /*
-    for (int i = 0; i < activeTerrain->size(); i++) {
-        activeTerrain->at(i).shiftTerrainSegment(deltaX);
-    }
-     */
     
     // debug:
-    cout << "after shift:" << endl;
+    //cout << "after shift:" << endl;
     //Utilities::printTerrain(activeTerrain);
     // end
     
     // if first segment is off screen, move it to leftInactiveTerrain
-    TerrainSegment firstSegment = activeTerrain->at(0);
-    if (firstSegment.isOffScreen()) {
+    TerrainSegment* firstSegment = activeTerrain->at(0);
+    if (firstSegment->isOffScreen()) {
         leftInactiveTerrain->push_back(firstSegment);
         activeTerrain->erase(activeTerrain->begin());
     }
     
     // append new segment to current terrain, if necessary:
-    TerrainSegment lastActiveSegment = activeTerrain->at(activeTerrain->size() - 1);
-    if (lastActiveSegment.isCompletelyInsideScreen()) {
+    TerrainSegment* lastActiveSegment = activeTerrain->at(activeTerrain->size() - 1);
+    if (lastActiveSegment->isCompletelyInsideScreen()) {
         if (!rightInactiveTerrain || rightInactiveTerrain->empty()) {
-            // create new right terrain
             addTerrainSegments(rightInactiveTerrain);
         }
         
         // pop first element from right inactive terrain, and push first point back to current terrain
-        TerrainSegment firstRightInactiveSegment = rightInactiveTerrain->at(0);
-        firstRightInactiveSegment.updateLeftmostPosition(lastActiveSegment.getRightmostXCoordinate());
-        //lastActivePoint->setXOffsetToNext(firstRightInactivePoint->getXOffsetToPrevious());
+        TerrainSegment* firstRightInactiveSegment = rightInactiveTerrain->at(0);
+        firstRightInactiveSegment->updateLeftmostPosition(lastActiveSegment->getRightmostPoint());
         activeTerrain->push_back(firstRightInactiveSegment);
         rightInactiveTerrain->erase(rightInactiveTerrain->begin());
         

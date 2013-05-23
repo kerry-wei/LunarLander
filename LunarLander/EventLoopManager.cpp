@@ -47,7 +47,7 @@ void EventLoopManager::handleStartGame() {
         spaceship->moveToInitialPosition();
         
         TerrainGenerator *terrainGenerator = TerrainGenerator::instance();
-        vector<TerrainSegment> *terrain = terrainGenerator->createInitialTerrain();
+        vector<TerrainSegment*> *terrain = terrainGenerator->createInitialTerrain();
         TerrainRenderer *terrainRenderer = TerrainRenderer::instance();
         terrainRenderer->drawTerrain(terrain);
     }

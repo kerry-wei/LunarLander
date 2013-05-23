@@ -13,36 +13,35 @@
 #include <vector>
 #include "TerrainPoint.h"
 #include "PathDefinition.h"
+#include "DrawableObject.h"
 #include "XInfo.h"
 
 using namespace std;
 
 
-class TerrainSegment {
+class TerrainSegment : public DrawableObject {
 public:
     TerrainSegment(TerrainPoint p1, TerrainPoint p2, PathSpec pathSpec, int numOfPoints);
     ~TerrainSegment();
     bool isOffScreen();
     bool isCompletelyInsideScreen();
     void shiftTerrainSegment(double deltaX);
-    void updateRightmostPosition(int rightmostX);
-    void updateLeftmostPosition(int leftmostX);
+    void updateRightmostPosition(TerrainPoint point);
+    void updateLeftmostPosition(TerrainPoint point);
+    void updateSegmentPosition();
+    TerrainPoint getLeftmostPoint();
+    TerrainPoint getRightmostPoint();
     int getLeftmostXCoordinate();
     int getRightmostXCoordinate();
-    void drawSegment();
-    void clearSegment();
-    void draw(unsigned long foreground, unsigned long background);
+    virtual void drawSegment();
+    virtual void clearSegment();
+    
     void printSegment();
     
-private:
-    //TerrainPoint p1;
-    //TerrainPoint p2;
+protected:
     PathSpec pathSpec;
-    XInfo *xInfo;
-    //int numOfPoints;
-    
     vector<TerrainPoint> segmentPath;
-    
+    void draw(unsigned long foreground, unsigned long background);
     void generateSegment(TerrainPoint startPoint, TerrainPoint endPoint, PathSpec spec, int numOfPoints);
     void updateXOffsets();
     

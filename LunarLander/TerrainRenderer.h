@@ -23,12 +23,11 @@ public:
     TerrainRenderer();
     ~TerrainRenderer();
     
-    void drawTerrain(vector<TerrainSegment>* terrain);
-    void clearTerrain(vector<TerrainSegment>* terrain);
+    void drawTerrain(vector<TerrainSegment*>* terrain);
+    void clearTerrain(vector<TerrainSegment*>* terrain);
     
 private:
     static TerrainRenderer* terrainRenderer;
-    void renderTerrain(vector<TerrainSegment>* terrain, unsigned long foreground, unsigned long background);
     
 };
 

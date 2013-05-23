@@ -60,10 +60,10 @@ void TerrainManager::updateLeftTerrain(double deltaX) {
         Utilities::reportError("deltaX should be negative");
     }
     
-    vector<TerrainSegment>* currentTerrain = terrainGenerator->getActiveTerrain();
+    vector<TerrainSegment*>* currentTerrain = terrainGenerator->getActiveTerrain();
     terrainRenderer->clearTerrain(currentTerrain);
     
-    vector<TerrainSegment>* activeTerrain = terrainGenerator->getRightShiftedTerrain(deltaX);
+    vector<TerrainSegment*>* activeTerrain = terrainGenerator->getRightShiftedTerrain(deltaX);
     
     // debug:
     /*
@@ -77,15 +77,15 @@ void TerrainManager::updateLeftTerrain(double deltaX) {
 }
 
 void TerrainManager::updateRightTerrain(double deltaX) {
-    vector<TerrainSegment>* currentTerrain = terrainGenerator->getActiveTerrain();
+    vector<TerrainSegment*>* currentTerrain = terrainGenerator->getActiveTerrain();
     terrainRenderer->clearTerrain(currentTerrain);
     
-    vector<TerrainSegment>* activeTerrain = terrainGenerator->getLeftShiftedTerrain(deltaX);
+    vector<TerrainSegment*>* activeTerrain = terrainGenerator->getLeftShiftedTerrain(deltaX);
     terrainRenderer->drawTerrain(activeTerrain);
     
-    cout << "going to print shifted active terrain:" << endl;
+    //cout << "going to print shifted active terrain:" << endl;
     //Utilities::printTerrain(activeTerrain);
-    cout << endl << endl;
+    //cout << endl << endl;
 }
 
 TerrainManager::~TerrainManager() {

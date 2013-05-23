@@ -10,22 +10,29 @@
 #define __LunarLander__LandingPad__
 
 #include <iostream>
-#include "DrawableObject.h"
+#include "TerrainSegment.h"
 #include "TerrainPoint.h"
+#include "PathDefinition.h"
 
 using namespace std;
 
-class LandingPad : public DrawableObject {
+class LandingPad : public TerrainSegment {
 public:
-    LandingPad();
-    LandingPad(TerrainPoint* p1, TerrainPoint* p2);
+    LandingPad(TerrainPoint p1, TerrainPoint p2, PathSpec pathSpce);
     ~LandingPad();
     
-    void draw();
+    void drawSegment();
+    void clearSegment();
+    
+    
     
 private:
+    /*
     TerrainPoint* p1;
     TerrainPoint* p2;
+     */
+    
+    void drawLandingPad();
 };
 
 #endif /* defined(__LunarLander__LandingPad__) */

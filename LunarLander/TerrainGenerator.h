@@ -26,14 +26,14 @@ public:
     TerrainGenerator();
     ~TerrainGenerator();
     
-    vector<TerrainSegment>* createInitialTerrain();
+    vector<TerrainSegment*>* createInitialTerrain();
     bool canShiftTerrainToRight();
     bool shouldCreateLeftTerrain();
     bool shouldCreateRightTerrain();
     
-    vector<TerrainSegment>* getActiveTerrain();
-    vector<TerrainSegment>* getLeftShiftedTerrain(double deltaX);
-    vector<TerrainSegment>* getRightShiftedTerrain(double deltaX);
+    vector<TerrainSegment*>* getActiveTerrain();
+    vector<TerrainSegment*>* getLeftShiftedTerrain(double deltaX);
+    vector<TerrainSegment*>* getRightShiftedTerrain(double deltaX);
     
 private:
     static TerrainGenerator* terrainGenerator;
@@ -51,15 +51,14 @@ private:
     int maxLandingPadCount;
     int landingPadCount;
     
-    vector<TerrainSegment>* activeTerrain;
-    vector<TerrainSegment>* leftInactiveTerrain;
-    vector<TerrainSegment>* rightInactiveTerrain;
+    vector<TerrainSegment*>* activeTerrain;
+    vector<TerrainSegment*>* leftInactiveTerrain;
+    vector<TerrainSegment*>* rightInactiveTerrain;
     
-    vector<TerrainPoint*>* generateSubPath(TerrainPoint startPoint, TerrainPoint endPoint, int numOfPoints);
-    void shiftTerrain(vector<TerrainSegment>* terrain, double deltaX);
+    void shiftTerrain(vector<TerrainSegment*>* terrain, double deltaX);
     vector<PathSpec> generatePathSpecs(int numOfPathSpec);
     
-    void addTerrainSegments(vector<TerrainSegment>* terrain);
+    void addTerrainSegments(vector<TerrainSegment*>* terrain);
     
 };
 
