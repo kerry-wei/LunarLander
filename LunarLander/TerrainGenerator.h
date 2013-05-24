@@ -29,8 +29,8 @@ public:
     void resetAllTerrain();
     vector<TerrainSegment*>* createInitialTerrain();
     bool canShiftTerrainToRight();
-    bool shouldCreateLeftTerrain();
-    bool shouldCreateRightTerrain();
+    bool isLeftTerrainEmpty();
+    bool isRightTerrainEmpty();
     TerrainSegment* getTerrainSegmentBasedOnX(int xPos);
     
     vector<TerrainSegment*>* getActiveTerrain();

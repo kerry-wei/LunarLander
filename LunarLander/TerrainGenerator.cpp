@@ -213,12 +213,12 @@ bool TerrainGenerator::canShiftTerrainToRight() {
     return canShiftToRight;
 }
 
-bool TerrainGenerator::shouldCreateLeftTerrain() {
+bool TerrainGenerator::isLeftTerrainEmpty() {
     if (!leftInactiveTerrain) return false;
     return leftInactiveTerrain->empty();
 }
 
-bool TerrainGenerator::shouldCreateRightTerrain() {
+bool TerrainGenerator::isRightTerrainEmpty() {
     if (!rightInactiveTerrain) return false;
     return rightInactiveTerrain->empty();
 }

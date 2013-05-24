@@ -26,6 +26,7 @@ public:
 private:
     static CollisionDetector* collisionDetector;
     TerrainManager* terrainManager;
+    double landingSpeedLimit;
     
     bool collisionHappens(Spaceship* spaceship, TerrainSegment* segment);
     bool landingSucceeds(Spaceship* spaceship, TerrainSegment* segment);

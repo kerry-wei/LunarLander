@@ -10,6 +10,7 @@
 #include <X11/Xutil.h>
 #include "Spaceship.h"
 #include "DrawableObject.h"
+#include "TerrainManager.h"
 #include <iostream>
 #include <cstdlib>
 #include <stdio.h>
@@ -25,6 +26,8 @@ Spaceship::Spaceship() : DrawableObject() {
     ySpeed = 0.0;
     xSpeedLimit = 3.0;
     ySpeedLimit = 3.0;
+    xLeftLimit = 200;
+    xRightLimit = 500;
     
     animationFrameCount = 11;
     animationFrameIndex = 0;
@@ -38,6 +41,8 @@ Spaceship::Spaceship(int x, int y) : DrawableObject(x, y) {
     ySpeed = 0.0;
     xSpeedLimit = 2.5;
     ySpeedLimit = 4.0;
+    xLeftLimit = 200;
+    xRightLimit = 500;
     
     animationFrameCount = 11;
     animationFrameIndex = 0;
@@ -118,9 +123,20 @@ void Spaceship::move(int deltaX, int deltaY) {
     }
     
     this->clearDrawing();
-    DrawableObject::move(deltaX, deltaY);
     
-    // cout << "move - spaceship position: (" << x << ", " << y << ")" << endl;
+    TerrainManager* terrainManager = TerrainManager::instance();
+    if (terrainManager->isLeftTerrainEmpty() && x + deltaX < xLeftLimit) {
+        x += deltaX;
+    } else if (!terrainManager->isLeftTerrainEmpty() && x + deltaX < xLeftLimit) {
+        // x-coordinate stays still
+    } else if ( x + deltaX <= xRightLimit) {
+        x += deltaX;
+    }
+    
+    this->y += deltaY;
+    
+    //cout << "move - spaceship position: (" << x << ", " << y << ")" << endl;
+    //cout << "move - spaceship xSpeed = " << xSpeed << ", ySpeed = " << ySpeed << endl;
     
     this->draw();
 }

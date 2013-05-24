@@ -27,6 +27,7 @@ CollisionDetector* CollisionDetector::instance() {
 
 CollisionDetector::CollisionDetector() {
     terrainManager = TerrainManager::instance();
+    landingSpeedLimit = 3.0;
 }
 
 bool CollisionDetector::spaceshipCrashWillHappen() {
@@ -36,7 +37,7 @@ bool CollisionDetector::spaceshipCrashWillHappen() {
     TerrainSegment* segment = terrainGenerator->getTerrainSegmentBasedOnX(spaceship->getXPosition());
     
     if (typeid(LandingPad) == typeid(*segment)) {
-        return spaceship->getYSpeed() > 3.0;
+        return spaceship->getYSpeed() > landingSpeedLimit;
     } else {
         return collisionHappens(spaceship, segment);
     }
@@ -62,10 +63,12 @@ bool CollisionDetector::collisionHappens(Spaceship* spaceship, TerrainSegment* s
         return false;
     }
     
+    XInfo* xInfo = XInfo::instance(0, NULL);
+    int pixmapHeight = xInfo->getPixmapHeight();
     int shipWidth = spaceship->getWidth();
     int shipHeight = spaceship->getHeight();
     int shipX1 = spaceship->getXPosition();
-    int shipY1 = 600 - spaceship->getYPosition() - shipHeight;
+    int shipY1 = pixmapHeight - spaceship->getYPosition() - shipHeight;
     int shipX2 = shipX1 + shipWidth;
     //int shipY2 = shipY1;
     
@@ -74,9 +77,9 @@ bool CollisionDetector::collisionHappens(Spaceship* spaceship, TerrainSegment* s
     TerrainPoint p2 = boundaryPoints.at(1);
     
     int p1x = p1.getXCoordinate();
-    int p1y = 600 - p1.getYCoordinate();
+    int p1y = pixmapHeight - p1.getYCoordinate();
     int p2x = p2.getXCoordinate();
-    int p2y = 600 - p2.getYCoordinate();
+    int p2y = pixmapHeight - p2.getYCoordinate();
     
     if (shipY1 > p1y && shipY1 > p2y) {
         return false;
@@ -96,7 +99,7 @@ bool CollisionDetector::collisionHappens(Spaceship* spaceship, TerrainSegment* s
 bool CollisionDetector::landingSucceeds(Spaceship* spaceship, TerrainSegment* segment) {
     double shipYSpeed = spaceship->getYSpeed();
     bool landingHappens = collisionHappens(spaceship, segment);
-    bool landingSuccess = landingHappens && (shipYSpeed < 3.0);
+    bool landingSuccess = landingHappens && (shipYSpeed < landingSpeedLimit);
     return landingSuccess;
 }
 

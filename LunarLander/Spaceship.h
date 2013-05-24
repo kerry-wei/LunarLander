@@ -45,6 +45,9 @@ private:
     double xSpeedLimit;
     double ySpeedLimit;
     
+    int xLeftLimit;
+    int xRightLimit;
+    
     int initialX;
     int initialY;
     

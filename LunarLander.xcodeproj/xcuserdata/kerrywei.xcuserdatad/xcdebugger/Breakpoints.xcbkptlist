@@ -20,32 +20,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "LunarLander/LandingPad.cpp"
-         timestampString = "390961248.203196"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "42"
-         endingLineNumber = "42"
-         landmarkName = "LandingPad::clearSegment()"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "LunarLander/LandingPad.cpp"
-         timestampString = "390963243.187307"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "38"
-         endingLineNumber = "38"
-         landmarkName = "LandingPad::drawSegment()"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "LunarLander/CollisionDetector.cpp"
          timestampString = "391057796.764883"
          startingColumnNumber = "9223372036854775807"
@@ -112,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LunarLander/TerrainManager.cpp"
-         timestampString = "391034119.845651"
+         timestampString = "391112361.972436"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "70"
-         endingLineNumber = "70"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
          landmarkName = "TerrainManager::updateLeftTerrain(double deltaX)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -157,6 +131,45 @@
          startingLineNumber = "55"
          endingLineNumber = "55"
          landmarkName = "CollisionDetector::isLandingSuccessful()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "LunarLander/Spaceship.cpp"
+         timestampString = "391112534.717625"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "136"
+         endingLineNumber = "136"
+         landmarkName = "Spaceship::move(int deltaX, int deltaY)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "LunarLander/Spaceship.cpp"
+         timestampString = "391112534.717625"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "140"
+         endingLineNumber = "140"
+         landmarkName = "Spaceship::move(int deltaX, int deltaY)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "LunarLander/Spaceship.cpp"
+         timestampString = "391112534.717625"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "143"
+         endingLineNumber = "143"
+         landmarkName = "Spaceship::move(int deltaX, int deltaY)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

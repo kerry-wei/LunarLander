@@ -21,6 +21,8 @@ public:
     ~TerrainManager();
     
     void initTerrain();
+    bool isLeftTerrainEmpty();
+    bool isRightTerrainEmpty();
     bool shouldUpdateTerrain(double x, double y);
     void updateTerrainBasedOnSpaceshipPosition(Spaceship *spaceship, double deltaX, double deltaY);
     

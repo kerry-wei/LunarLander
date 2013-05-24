@@ -132,8 +132,6 @@ void EventLoopManager::startGameLoop() {
         if (gameState->isGameStarted()) {
             unsigned long end = Utilities::now();
             if (end - lastRepaint > 1000000 / FPS) {
-                
-                
                 int spaceshipX = spaceship->getXPosition();
                 int spaceshipY = spaceship->getYPosition();
                 double deltaX = spaceship->getXSpeed();
@@ -142,9 +140,9 @@ void EventLoopManager::startGameLoop() {
                 if (terrainManager->shouldUpdateTerrain(spaceshipX + deltaX, spaceshipY + deltaY)) {
                     terrainManager->updateTerrainBasedOnSpaceshipPosition(spaceship, deltaX, deltaY);
                     spaceship->playAnimation();
-                } else {
-                    gameObjManager->timerUpdate();
                 }
+                
+                gameObjManager->timerUpdate();
                 
                 // update game info:
                 gameSceneManager->updateGameInfo(0, 0.0, 0.0, (double)(windowAttr.height - spaceship->getYPosition()),

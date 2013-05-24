@@ -30,12 +30,6 @@ TerrainManager::TerrainManager() {
     terrainRenderer = TerrainRenderer::instance();
 }
 
-/*
-int TerrainManager::getXLeftLimit() {
-    return xLeftLimit;
-}
- */
-
 void TerrainManager::resetTerrain() {
     terrainGenerator->resetAllTerrain();
 }
@@ -44,6 +38,14 @@ void TerrainManager::initTerrain() {
     terrainGenerator->resetAllTerrain();
     vector<TerrainSegment*> *terrain = terrainGenerator->createInitialTerrain();
     terrainRenderer->drawTerrain(terrain);
+}
+
+bool TerrainManager::isLeftTerrainEmpty() {
+    return terrainGenerator->isLeftTerrainEmpty();
+}
+
+bool TerrainManager::isRightTerrainEmpty() {
+    return terrainGenerator->isRightTerrainEmpty();
 }
 
 bool TerrainManager::shouldUpdateTerrain(double x, double y) {
