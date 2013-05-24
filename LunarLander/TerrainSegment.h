@@ -42,7 +42,7 @@ public:
 protected:
     PathSpec pathSpec;
     vector<TerrainPoint> segmentPath;
-    void draw(unsigned long foreground, unsigned long background);
+    void draw(GC gc);
     void generateSegment(TerrainPoint startPoint, TerrainPoint endPoint, PathSpec spec, int numOfPoints);
     void updateXOffsets();
     

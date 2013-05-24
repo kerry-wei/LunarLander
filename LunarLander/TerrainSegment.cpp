@@ -122,23 +122,14 @@ int TerrainSegment::getRightmostXCoordinate() {
 }
 
 void TerrainSegment::drawSegment() {
-    unsigned long foreground = BlackPixel(xInfo->display, xInfo->screen);
-	unsigned long background = WhitePixel(xInfo->display, xInfo->screen);
-    draw(foreground, background);
+    draw(xInfo->gc[0]);
 }
 
 void TerrainSegment::clearSegment() {
-    unsigned long foreground = WhitePixel(xInfo->display, xInfo->screen);
-	unsigned long background = WhitePixel(xInfo->display, xInfo->screen);
-    draw(foreground, background);
+    draw(xInfo->gc[1]);
 }
 
-void TerrainSegment::draw(unsigned long foreground, unsigned long background) {
-    GC gc = XCreateGC(xInfo->display, xInfo->pixmap, 0, 0);
-	XSetForeground(xInfo->display, gc, foreground);
-	XSetBackground(xInfo->display, gc, background);
-	XSetFillStyle(xInfo->display, gc, FillSolid);
-	XSetLineAttributes(xInfo->display, gc, 2, LineSolid, CapRound, JoinMiter);
+void TerrainSegment::draw(GC gc) {
     XPoint points[segmentPath.size()];
     for (int i = 0; i < segmentPath.size(); i++) {
         TerrainPoint point = segmentPath.at(i);
@@ -147,14 +138,6 @@ void TerrainSegment::draw(unsigned long foreground, unsigned long background) {
     }
     XDrawLines(xInfo->display, xInfo->pixmap, gc, points, (int)segmentPath.size(), CoordModeOrigin);
     
-    // draw landing pads:
-    /*
-    vector<LandingPad*>* landingPads = terrain->landingPads;
-    for (int i = 0; i < landingPads->size(); i++) {
-        LandingPad* landingPad = landingPads->at(i);
-        landingPad->draw();
-    }
-     */
 }
 
 void TerrainSegment::printSegment() {

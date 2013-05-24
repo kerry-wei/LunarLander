@@ -62,18 +62,7 @@ void DrawableObject::draw() {
 // DOTO: careful when collision happens. maybe re-draw self with white color is better,
 // but still it might wipe out part of the terrain
 void DrawableObject::clearDrawing() {
-    /*
-    GC gc = XCreateGC(xInfo.display, xInfo.window, 0, 0);
-	XSetForeground(xInfo.display, gc, WhitePixel(xInfo.display, xInfo.screen));
-	XSetBackground(xInfo.display, gc, WhitePixel(xInfo.display, xInfo.screen));
-	XSetFillStyle(xInfo.display, gc, FillSolid);
-	XSetLineAttributes(xInfo.display, gc, 7, LineSolid, CapRound, JoinMiter);
-     */
-    
     XFillRectangle(xInfo->display, xInfo->pixmap, xInfo->gc[1], x - 1, y - 1, width + 2, height + 2);
-    
-    //XClearArea(xInfo->display, xInfo->window, x - 1, y - 1, width + 2, height + 2, false);
-    
 }
 
 

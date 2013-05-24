@@ -71,9 +71,7 @@ void GameSceneManager::showWindowTooSmallMessage() {
     XInfo *xInfo = XInfo::instance(0, NULL);
     XWindowAttributes windowAttr;
     XGetWindowAttributes(xInfo->display, xInfo->window, &windowAttr);
-    GC gc = XCreateGC(xInfo->display, xInfo->window, 0, 0);
-    XSetBackground(xInfo->display, gc, WhitePixel(xInfo->display, xInfo->screen));
-    XSetForeground(xInfo->display, gc, BlackPixel(xInfo->display, xInfo->screen));
+    GC gc = xInfo->gc[1];
     
     // font size: 8, 10, 12, 14, 18, 24
     XFontStruct *font = XLoadQueryFont(xInfo->display, "12x24");

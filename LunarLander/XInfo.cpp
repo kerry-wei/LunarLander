@@ -76,18 +76,18 @@ XInfo::XInfo (int argc, char *argv[]) {
                            );
     
     // black
-    gc[0] = XCreateGC(display, window, 0, 0);
-	XSetForeground(display, gc[0], BlackPixel(display, screen));
-	XSetBackground(display, gc[0], WhitePixel(display, screen));
-	XSetFillStyle(display, gc[0], FillSolid);
-	XSetLineAttributes(display, gc[0], 1, LineSolid, CapButt, JoinRound);
-    
-    // white
     gc[1] = XCreateGC(display, window, 0, 0);
-	XSetForeground(display, gc[1], WhitePixel(display, screen));
-	XSetBackground(display, gc[1], BlackPixel(display, screen));
+	XSetForeground(display, gc[1], BlackPixel(display, screen));
+	XSetBackground(display, gc[1], WhitePixel(display, screen));
 	XSetFillStyle(display, gc[1], FillSolid);
 	XSetLineAttributes(display, gc[1], 1, LineSolid, CapButt, JoinRound);
+    
+    // white
+    gc[0] = XCreateGC(display, window, 0, 0);
+	XSetForeground(display, gc[0], WhitePixel(display, screen));
+	XSetBackground(display, gc[0], BlackPixel(display, screen));
+	XSetFillStyle(display, gc[0], FillSolid);
+	XSetLineAttributes(display, gc[0], 1, LineSolid, CapButt, JoinRound);
     
     int depth = DefaultDepth(display, DefaultScreen(display));
     pixmap = XCreatePixmap(display, window, hints.width, hints.height, depth);

@@ -88,10 +88,10 @@ void WelcomeLayer::updateGameInfo(int score, double time, double fuel, double al
     //cout << "score: " << score << ", time: " << time << ", fuel: " << fuel << ", altitude: " << altitude << ", xSpeed: " << xSpeed << ", ySpeed:" << ySpeed << endl;
     XWindowAttributes windowAttr;
     XGetWindowAttributes(xInfo->display, xInfo->window, &windowAttr);
-    GC gc = XCreateGC(xInfo->display, xInfo->window, 0, 0);
-    XSetBackground(xInfo->display, gc, WhitePixel(xInfo->display, xInfo->screen));
-    XSetForeground(xInfo->display, gc, BlackPixel(xInfo->display, xInfo->screen));
-    XFontStruct *font = XLoadQueryFont(xInfo->display, "12x24");
+    GC gc = xInfo->gc[0]; //XCreateGC(xInfo->display, xInfo->window, 0, 0);
+    //XSetBackground(xInfo->display, gc, BlackPixel(xInfo->display, xInfo->screen));
+    //XSetForeground(xInfo->display, gc, WhitePixel(xInfo->display, xInfo->screen));
+    XFontStruct *font = XLoadQueryFont(xInfo->display, "*x10");
     XSetFont(xInfo->display, xInfo->gc[0], font->fid);
     string numToString;
     ostringstream convert;
