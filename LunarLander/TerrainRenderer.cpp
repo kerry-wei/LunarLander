@@ -45,5 +45,3 @@ TerrainRenderer::~TerrainRenderer() {
 }
 
 
-
-

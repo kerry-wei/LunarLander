@@ -14,24 +14,27 @@
 #include "GameSceneManager.h"
 #include "GameState.h"
 #include "GameObjectManager.h"
+#include "TerrainManager.h"
 
 using namespace std;
 
 class EventLoopManager {
 public:
     EventLoopManager();
-    void eventloop();
+    void startGameLoop();
     
 private:
     int FPS;
     XInfo* xInfo;
     GameSceneManager* gameSceneManager;
-    GameState* gameState;
     GameObjectManager* gameObjManager;
+    TerrainManager* terrainManager;
+    GameState* gameState;
     
     void handleQuitGame();
     void handleStartGame();
     void handleSpaceshipCrash();
+    void handleLandingSucceed();
     void handleResize(XInfo* xInfo, XEvent &event);
     void repositionPixmap(XConfigureEvent xce);
 };

@@ -227,5 +227,3 @@ TerrainSegment::~TerrainSegment() {
 }
 
 
-
-

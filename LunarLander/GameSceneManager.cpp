@@ -26,6 +26,8 @@ GameSceneManager* GameSceneManager::instance() {
 GameSceneManager::GameSceneManager() {
     xInfo = XInfo::instance(0, NULL);
     welcomeLayer = WelcomeLayer();
+    gameOverLayer = GameOverLayer();
+    congratLayer = CongratulationLayer();
 }
 
 void GameSceneManager::clearScreen() {
@@ -40,10 +42,7 @@ void GameSceneManager::showWelcomeScreen() {
     XFillRectangle(xInfo->display, xInfo->pixmap, xInfo->gc[1], 0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight());
     welcomeLayer.updateGameInfo(0, 0.0, 0.0, 0.0, 0.0, 0.0);
     welcomeLayer.drawWelcomeScreen();
-    XCopyArea(xInfo->display, xInfo->pixmap, xInfo->window, xInfo->gc[0],
-              0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight(),  // region of pixmap to copy
-              xInfo->pixmapXOffset, xInfo->pixmapYOffset); // position to put top left corner of pixmap in window
-    XFlush(xInfo->display);
+    copyPixmapToWindow();
 }
 
 void GameSceneManager::removeWelcomeScreen() {
@@ -52,23 +51,20 @@ void GameSceneManager::removeWelcomeScreen() {
 
 void GameSceneManager::showSpaceshipCrashScreen() {
     clearScreen();
+    
     welcomeLayer.updateGameInfo(0, 0.0, 0.0, 0.0, 0.0, 0.0);
+    gameOverLayer.drawGameOverScreen();
     
-    GC gc = xInfo->gc[0];
-    XFontStruct *font = XLoadQueryFont(xInfo->display, "12x24");
-    XSetFont(xInfo->display, gc, font->fid);
+    copyPixmapToWindow();
+}
+
+void GameSceneManager::showLandingSucceedScreen() {
+    clearScreen();
     
-    string beginGame = "Spaceship Crashes...";
-    int labelWidth = XTextWidth(font, beginGame.c_str(), (int)beginGame.length());
-    int xPosition = xInfo->getPixmapWidth() / 2 - labelWidth / 2;
-    int yPosition = xInfo->getPixmapHeight() / 2;
-    XDrawImageString(xInfo->display, xInfo->pixmap, gc, xPosition, yPosition, beginGame.c_str(), (int)beginGame.length());
+    welcomeLayer.updateGameInfo(0, 0.0, 0.0, 0.0, 0.0, 0.0);
+    congratLayer.drawCongratScreen();
     
-    
-    XCopyArea(xInfo->display, xInfo->pixmap, xInfo->window, xInfo->gc[0],
-              0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight(),  // region of pixmap to copy
-              xInfo->pixmapXOffset, xInfo->pixmapYOffset); // position to put top left corner of pixmap in window
-    XFlush(xInfo->display);
+    copyPixmapToWindow();
 }
 
 void GameSceneManager::showWindowTooSmallMessage() {
@@ -94,13 +90,16 @@ void GameSceneManager::updateGameInfo(int score, double time, double fuel, doubl
     welcomeLayer.updateGameInfo(score, time, fuel, altitude, xSpeed, ySpeed);
 }
 
+void GameSceneManager::copyPixmapToWindow() {
+    XCopyArea(xInfo->display, xInfo->pixmap, xInfo->window, xInfo->gc[0],
+              0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight(),  // region of pixmap to copy
+              xInfo->pixmapXOffset, xInfo->pixmapYOffset); // position to put top left corner of pixmap in window
+    XFlush(xInfo->display);
+}
 
 GameSceneManager::~GameSceneManager() {
     
 }
-
-
-
 
 
 

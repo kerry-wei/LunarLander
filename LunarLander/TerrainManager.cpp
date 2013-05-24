@@ -40,6 +40,12 @@ void TerrainManager::resetTerrain() {
     terrainGenerator->resetAllTerrain();
 }
 
+void TerrainManager::initTerrain() {
+    terrainGenerator->resetAllTerrain();
+    vector<TerrainSegment*> *terrain = terrainGenerator->createInitialTerrain();
+    terrainRenderer->drawTerrain(terrain);
+}
+
 bool TerrainManager::shouldUpdateTerrain(double x, double y) {
     if ((x <= xLeftLimit && terrainGenerator->canShiftTerrainToRight()) || x >= xRightLimit) {
         return true;
@@ -86,11 +92,6 @@ void TerrainManager::updateRightTerrain(double deltaX) {
 TerrainManager::~TerrainManager() {
     
 }
-
-
-
-
-
 
 
 

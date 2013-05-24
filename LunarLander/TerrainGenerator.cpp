@@ -91,6 +91,9 @@ vector<PathSpec> TerrainGenerator::generatePathSpecs(int numOfPathSpec) {
 }
 
 void TerrainGenerator::resetTerrain(vector<TerrainSegment*>* terrain) {
+    for (int i = 0; i < terrain->size(); i++) {
+        delete terrain->at(i);
+    }
     terrain->clear();
 }
 
@@ -265,18 +268,7 @@ vector<TerrainSegment*>* TerrainGenerator::getRightShiftedTerrain(double deltaX)
 }
 
 vector<TerrainSegment*>* TerrainGenerator::getLeftShiftedTerrain(double deltaX) {
-    // debug:
-    //cout << "before shift:" << endl;
-    //Utilities::printTerrain(activeTerrain);
-    // end
-    
     shiftTerrain(activeTerrain, deltaX);
-    
-    
-    // debug:
-    //cout << "after shift:" << endl;
-    //Utilities::printTerrain(activeTerrain);
-    // end
     
     // if first segment is off screen, move it to leftInactiveTerrain
     TerrainSegment* firstSegment = activeTerrain->at(0);
@@ -304,11 +296,10 @@ vector<TerrainSegment*>* TerrainGenerator::getLeftShiftedTerrain(double deltaX) 
 }
 
 TerrainGenerator::~TerrainGenerator() {
-    
+    resetAllTerrain();
+    delete activeTerrain;
+    delete leftInactiveTerrain;
+    delete rightInactiveTerrain;
 }
-
-
-
-
 
 

@@ -27,6 +27,6 @@ int main(int argc, char** argv) {
     gameSceneManager->showWelcomeScreen();
     
     EventLoopManager eventLoopManager = EventLoopManager();
-    eventLoopManager.eventloop();
+    eventLoopManager.startGameLoop();
     
 }

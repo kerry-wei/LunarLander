@@ -44,3 +44,4 @@ void Utilities::printTerrain(vector<TerrainSegment> *terrain) {
     cout << endl;
 }
 
+

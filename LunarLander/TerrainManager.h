@@ -19,7 +19,8 @@ public:
     static TerrainManager* instance();
     TerrainManager();
     ~TerrainManager();
-    void resetTerrain();
+    
+    void initTerrain();
     bool shouldUpdateTerrain(double x, double y);
     void updateTerrainBasedOnSpaceshipPosition(Spaceship *spaceship, double deltaX, double deltaY);
     
@@ -30,6 +31,7 @@ private:
     TerrainGenerator *terrainGenerator;
     TerrainRenderer *terrainRenderer;
     
+    void resetTerrain();
     void updateLeftTerrain(double deltaX);
     void updateRightTerrain(double deltaX);
 };

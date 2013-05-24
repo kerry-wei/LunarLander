@@ -49,20 +49,3 @@ void GameState::setGameStarted(bool started) {
     gameStarted = started;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

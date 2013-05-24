@@ -20,13 +20,15 @@ public:
     ~CollisionDetector();
     
     bool spaceshipCrashWillHappen();
-    bool isLandingSuccessful(Spaceship* spaceship, TerrainSegment* landingPad);
+    bool isLandingSuccessful();
+    
     
 private:
     static CollisionDetector* collisionDetector;
     TerrainManager* terrainManager;
     
     bool collisionHappens(Spaceship* spaceship, TerrainSegment* segment);
+    bool landingSucceeds(Spaceship* spaceship, TerrainSegment* segment);
 };
 
 #endif /* defined(__LunarLander__CollisionDetector__) */

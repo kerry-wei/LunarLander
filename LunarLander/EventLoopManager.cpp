@@ -14,7 +14,6 @@
 #include "XInfo.h"
 #include "Utilities.h"
 #include "TerrainGenerator.h"
-#include "TerrainRenderer.h"
 #include "TerrainManager.h"
 #include "Spaceship.h"
 #include "CollisionDetector.h"
@@ -25,77 +24,10 @@ EventLoopManager::EventLoopManager() {
     this->gameSceneManager = GameSceneManager::instance();
     this->gameState = GameState::instance();
     this->gameObjManager = GameObjectManager::instance();
+    this->terrainManager = TerrainManager::instance();
 }
 
-void EventLoopManager::handleQuitGame() {
-    cout << "Terminated normally." << endl;
-    XCloseDisplay(xInfo->display);
-}
-
-void EventLoopManager::handleStartGame() {
-    gameSceneManager->clearScreen();
-    gameObjManager->resetSpaceship();
-    Spaceship *spaceship = gameObjManager->getSpaceship();
-    spaceship->draw();
-    
-    
-    
-    XWindowAttributes windowAttr;
-    XGetWindowAttributes(xInfo->display, xInfo->window, &windowAttr);
-    if (!gameState->isGameStarted() && xInfo->windowSizeIsEnough()) {
-        gameState->startGame();
-        gameSceneManager->removeWelcomeScreen();
-        
-        GameObjectManager *gameObjManager = GameObjectManager::instance();
-        Spaceship *spaceship = gameObjManager->getSpaceship();
-        spaceship->moveToInitialPosition();
-        
-        TerrainGenerator *terrainGenerator = TerrainGenerator::instance();
-        terrainGenerator->resetAllTerrain();
-        vector<TerrainSegment*> *terrain = terrainGenerator->createInitialTerrain();
-        TerrainRenderer *terrainRenderer = TerrainRenderer::instance();
-        terrainRenderer->drawTerrain(terrain);
-    }
-}
-
-void EventLoopManager::handleSpaceshipCrash() {
-    cout << "handleSpaceshipCrash: spaceship crashes!" << endl;
-    GameState *gameState = GameState::instance();
-    gameState->pauGame();
-    
-    GameSceneManager *gameSceneManager = GameSceneManager::instance();
-    gameSceneManager->showSpaceshipCrashScreen();
-}
-
-void EventLoopManager::handleResize(XInfo* xInfo, XEvent &event) {
-	XConfigureEvent xce = event.xconfigure;
-	fprintf(stderr, "Handling resize  w=%d  h=%d\n", xce.width, xce.height);
-    GameSceneManager *gameSceneManager = GameSceneManager::instance();
-	if (xce.width > xInfo->getPixmapWidth() && xce.height > xInfo->getPixmapHeight()) {
-        repositionPixmap(xce);
-	} else if (xce.width < xInfo->getPixmapWidth() || xce.height < xInfo->getPixmapHeight()) {
-        // show 'Too Small' message:
-        gameSceneManager->showWindowTooSmallMessage();
-    }
-}
-
-void EventLoopManager::repositionPixmap(XConfigureEvent xce) {
-    XClearWindow(xInfo->display, xInfo->window);
-    
-    // draw boundary
-    XDrawRectangle(xInfo->display, xInfo->pixmap, xInfo->gc[0], 0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight());
-    
-    // re-position pixmap:
-    xInfo->pixmapXOffset = (xce.width - xInfo->getPixmapWidth()) / 2;
-    xInfo->pixmapYOffset = (xce.height - xInfo->getPixmapHeight()) / 2;
-    
-    XCopyArea(xInfo->display, xInfo->pixmap, xInfo->window, xInfo->gc[0],
-              0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight(),  // region of pixmap to copy
-              xInfo->pixmapXOffset, xInfo->pixmapYOffset); // position to put top left corner of pixmap in window
-    XFlush(xInfo->display);
-}
-
-void EventLoopManager::eventloop() {
+void EventLoopManager::startGameLoop() {
     const int BufferSize = 10;
     char text[BufferSize];
     unsigned long lastRepaint = 0;
@@ -129,40 +61,40 @@ void EventLoopManager::eventloop() {
                     break;
                 case KeyPress: // any keypress
                 {
-                    int i = XLookupString( (XKeyEvent*)&event, text, BufferSize, &key, 0 );
+                    int i = XLookupString((XKeyEvent*)&event, text, BufferSize, &key, 0);
                     //cout << "KeySym " << key << " text='" << text << "'" << endl;
                     if ( i == 1 && text[0] == 'q' ) {
                         this->handleQuitGame();
                         return;
                     }
                     
-                    switch (key) { //the xkey for up / left / right are: XK_Up / XK_Left / XK_Right
-                        case 65362: // up
+                    switch (key) {
+                        case XK_Up:
                             if (gameState->isGameStarted()) {
                                 spaceship->setYSpeed(-0.05);
                             }
                             
                             break;
-                        case 65364: // down
+                        case XK_Down:
                             if (gameState->isGameStarted()) {
                                 spaceship->setYSpeed(0.05);
                             }
                             
                             break;
-                        case 65361: // left
+                        case XK_Left:
                             if (gameState->isGameStarted()) {
                                 spaceship->setXSpeed(-0.5); // -0.05
                             }
                             
                             break;
-                        case 65363: // right
+                        case XK_Right:
                             if (gameState->isGameStarted()) {
                                 spaceship->setXSpeed(0.5); // 0.05
                             }
                             
                             break;
                             
-                        case 32: // space
+                        case XK_space:
                             handleStartGame();
                             break;
                         default:
@@ -181,7 +113,6 @@ void EventLoopManager::eventloop() {
                     cout << "last event" << endl;
                     break;
                 default:
-                    //cout << "EventLoopManager: default" << endl;
                     break;
             }
         }
@@ -189,8 +120,11 @@ void EventLoopManager::eventloop() {
         // check collision:
         if (gameState->isGameStarted()) {
             bool crashWillHappen = collisionDetector->spaceshipCrashWillHappen();
+            bool landingWillSucceed = collisionDetector->isLandingSuccessful();
             if (crashWillHappen) {
                 handleSpaceshipCrash();
+            } else if (landingWillSucceed) {
+                handleLandingSucceed();
             }
         }
         
@@ -227,11 +161,76 @@ void EventLoopManager::eventloop() {
             if (XPending(xInfo->display) == 0) {
                 usleep(1000000 / FPS - ((unsigned int)end - (unsigned int)lastRepaint));
             }
-            
         }
-        
     }
+}
+
+
+void EventLoopManager::handleQuitGame() {
+    cout << "Terminated normally." << endl;
+    XCloseDisplay(xInfo->display);
+}
+
+void EventLoopManager::handleStartGame() {
+    gameSceneManager->clearScreen();
+    gameObjManager->resetSpaceship();
+    Spaceship *spaceship = gameObjManager->getSpaceship();
+    spaceship->draw();
     
+    
+    
+    XWindowAttributes windowAttr;
+    XGetWindowAttributes(xInfo->display, xInfo->window, &windowAttr);
+    if (!gameState->isGameStarted() && xInfo->windowSizeIsEnough()) {
+        gameState->startGame();
+        gameSceneManager->removeWelcomeScreen();
+        
+        GameObjectManager *gameObjManager = GameObjectManager::instance();
+        Spaceship *spaceship = gameObjManager->getSpaceship();
+        spaceship->moveToInitialPosition();
+        
+        terrainManager->initTerrain();
+    }
+}
+
+void EventLoopManager::handleSpaceshipCrash() {
+    cout << "handleSpaceshipCrash: spaceship crashes!" << endl;
+    gameState->pauGame();
+    gameSceneManager->showSpaceshipCrashScreen();
+}
+
+void EventLoopManager::handleLandingSucceed() {
+    cout << "handleLandingSucceed: spaceship is landing!" << endl;
+    gameState->pauGame();
+    gameSceneManager->showLandingSucceedScreen();
+}
+
+void EventLoopManager::handleResize(XInfo* xInfo, XEvent &event) {
+	XConfigureEvent xce = event.xconfigure;
+	fprintf(stderr, "Handling resize  w=%d  h=%d\n", xce.width, xce.height);
+    GameSceneManager *gameSceneManager = GameSceneManager::instance();
+	if (xce.width > xInfo->getPixmapWidth() && xce.height > xInfo->getPixmapHeight()) {
+        repositionPixmap(xce);
+	} else if (xce.width < xInfo->getPixmapWidth() || xce.height < xInfo->getPixmapHeight()) {
+        // show 'Too Small' message:
+        gameSceneManager->showWindowTooSmallMessage();
+    }
+}
+
+void EventLoopManager::repositionPixmap(XConfigureEvent xce) {
+    XClearWindow(xInfo->display, xInfo->window);
+    
+    // draw boundary
+    XDrawRectangle(xInfo->display, xInfo->pixmap, xInfo->gc[0], 0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight());
+    
+    // re-position pixmap:
+    xInfo->pixmapXOffset = (xce.width - xInfo->getPixmapWidth()) / 2;
+    xInfo->pixmapYOffset = (xce.height - xInfo->getPixmapHeight()) / 2;
+    
+    XCopyArea(xInfo->display, xInfo->pixmap, xInfo->window, xInfo->gc[0],
+              0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight(),  // region of pixmap to copy
+              xInfo->pixmapXOffset, xInfo->pixmapYOffset); // position to put top left corner of pixmap in window
+    XFlush(xInfo->display);
 }
 
 

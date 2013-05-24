@@ -15,6 +15,7 @@
 class XInfo {
 public:
     static XInfo* instance(int argc, char *argv[]);
+    XInfo(int argc, char *argv[]);
     
     bool windowSizeIsEnough();
     int getPixmapWidth();
@@ -22,12 +23,10 @@ public:
     int getWindowWidth();
     int getWindowHeight();
     
-    XInfo(int argc, char *argv[]);
     Display	 *display;
 	int		 screen;
 	Window	 window;
     Pixmap	pixmap;
-    
     int pixmapXOffset;
     int pixmapYOffset;
     GC gc[2];

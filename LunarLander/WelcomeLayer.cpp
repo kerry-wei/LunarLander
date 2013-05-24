@@ -72,7 +72,6 @@ void WelcomeLayer::drawWelcomeScreen() {
     yPosition = pixmapHeight / 2 + spaceBetweenMsg - 86;
     XDrawImageString(xInfo->display, xInfo->pixmap, gc, xPosition, yPosition, quitGame.c_str(), (int)quitGame.length());
     
-    XFlush(xInfo->display);
 }
 
 void WelcomeLayer::clearWelcomeScreen() {
@@ -181,8 +180,5 @@ void WelcomeLayer::updateGameInfo(int score, double time, double fuel, double al
 WelcomeLayer::~WelcomeLayer() {
     
 }
-
-
-
 
 

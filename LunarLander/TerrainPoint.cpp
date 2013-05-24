@@ -81,8 +81,3 @@ bool TerrainPoint::isUpwardPath(TerrainPoint p1, TerrainPoint p2) {
     return p1.xPoint.y < p2.xPoint.y;
 }
 
-
-
-
-
-

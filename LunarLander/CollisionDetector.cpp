@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Xiaojiang Wei. All rights reserved.
 //
 
+#include <typeinfo>
 #include "CollisionDetector.h"
 #include "LandingPad.h"
 #include "TerrainPoint.h"
@@ -33,20 +34,28 @@ bool CollisionDetector::spaceshipCrashWillHappen() {
     Spaceship *spaceship = gameObjManager->getSpaceship();
     TerrainGenerator* terrainGenerator = TerrainGenerator::instance();
     TerrainSegment* segment = terrainGenerator->getTerrainSegmentBasedOnX(spaceship->getXPosition());
-    return collisionHappens(spaceship, segment);
+    
+    if (typeid(LandingPad) == typeid(*segment)) {
+        return spaceship->getYSpeed() > 3.0;
+    } else {
+        return collisionHappens(spaceship, segment);
+    }
+    
 }
 
-bool CollisionDetector::isLandingSuccessful(Spaceship* spaceship, TerrainSegment* landingPad) {
-    int shipXPos = spaceship->getXPosition();
-    int shipYPos = spaceship->getYPosition();
+bool CollisionDetector::isLandingSuccessful() {
+    GameObjectManager *gameObjManager = GameObjectManager::instance();
+    Spaceship *spaceship = gameObjManager->getSpaceship();
+    TerrainGenerator* terrainGenerator = TerrainGenerator::instance();
+    TerrainSegment* segment = terrainGenerator->getTerrainSegmentBasedOnX(spaceship->getXPosition());
     
-    double spaceXSpeed = spaceship->getXSpeed();
-    double spaceYSpeed = spaceship->getYSpeed();
-    
-    
-    
-    // TODO: speed too high cause crash
+    if (typeid(LandingPad) != typeid(*segment)) {
+        return false;
+    } else {
+        return landingSucceeds(spaceship, segment);
+    }
 }
+
 
 bool CollisionDetector::collisionHappens(Spaceship* spaceship, TerrainSegment* segment) {
     if (segment == NULL) {
@@ -84,6 +93,12 @@ bool CollisionDetector::collisionHappens(Spaceship* spaceship, TerrainSegment* s
     
 }
 
+bool CollisionDetector::landingSucceeds(Spaceship* spaceship, TerrainSegment* segment) {
+    double shipYSpeed = spaceship->getYSpeed();
+    bool landingHappens = collisionHappens(spaceship, segment);
+    bool landingSuccess = landingHappens && (shipYSpeed < 3.0);
+    return landingSuccess;
+}
 
 
 CollisionDetector::~CollisionDetector() {

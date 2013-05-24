@@ -27,12 +27,12 @@ public:
     void clearDrawing();
     
 protected:
+    XInfo *xInfo;
+    
     int x;
     int y;
     int width;
     int height;
-    
-    XInfo *xInfo;
 };
 
 #endif /* defined(__LunarLander__DrawableObject__) */

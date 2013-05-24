@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA32AF1C174EF1D400AD3F06 /* GameOverLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA32AF1A174EF1D200AD3F06 /* GameOverLayer.cpp */; };
+		AA32AF20174F0E2600AD3F06 /* CongratulationLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA32AF1E174F0E2500AD3F06 /* CongratulationLayer.cpp */; };
 		AA5337C7174BBEB2004C4EE2 /* CollisionDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA5337C5174BBEB2004C4EE2 /* CollisionDetector.cpp */; };
 		AA5337CA174BC30E004C4EE2 /* LandingPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA5337C8174BC30E004C4EE2 /* LandingPad.cpp */; };
 		AA61742417456A2300BC1EAA /* GameObjectManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA61742217456A2300BC1EAA /* GameObjectManager.cpp */; };
@@ -52,6 +54,10 @@
 		AA30AF07174AE70900ECA52B /* frame_9.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = frame_9.bmp; sourceTree = "<group>"; };
 		AA30AF08174AE70C00ECA52B /* frame_10.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = frame_10.bmp; sourceTree = "<group>"; };
 		AA30AF09174AE71000ECA52B /* frame_11.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = frame_11.bmp; sourceTree = "<group>"; };
+		AA32AF1A174EF1D200AD3F06 /* GameOverLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOverLayer.cpp; sourceTree = "<group>"; };
+		AA32AF1B174EF1D300AD3F06 /* GameOverLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverLayer.h; sourceTree = "<group>"; };
+		AA32AF1E174F0E2500AD3F06 /* CongratulationLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CongratulationLayer.cpp; sourceTree = "<group>"; };
+		AA32AF1F174F0E2600AD3F06 /* CongratulationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CongratulationLayer.h; sourceTree = "<group>"; };
 		AA5337C5174BBEB2004C4EE2 /* CollisionDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionDetector.cpp; sourceTree = "<group>"; };
 		AA5337C6174BBEB2004C4EE2 /* CollisionDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionDetector.h; sourceTree = "<group>"; };
 		AA5337C8174BC30E004C4EE2 /* LandingPad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LandingPad.cpp; sourceTree = "<group>"; };
@@ -101,18 +107,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AA95BB17174451FF00B452BC /* resources */ = {
+		AA32AF1D174EF3AC00AD3F06 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				AA30AEFF174AE6FE00ECA52B /* frame_1.bmp */,
+				AA30AF00174AE6FE00ECA52B /* frame_2.bmp */,
+				AA30AF01174AE6FF00ECA52B /* frame_3.bmp */,
+				AA30AF02174AE70000ECA52B /* frame_4.bmp */,
+				AA30AF03174AE70100ECA52B /* frame_5.bmp */,
+				AA30AF04174AE70200ECA52B /* frame_6.bmp */,
+				AA30AF05174AE70400ECA52B /* frame_7.bmp */,
+				AA30AF06174AE70600ECA52B /* frame_8.bmp */,
+				AA30AF07174AE70900ECA52B /* frame_9.bmp */,
+				AA30AF08174AE70C00ECA52B /* frame_10.bmp */,
+				AA30AF09174AE71000ECA52B /* frame_11.bmp */,
 			);
 			name = resources;
-			path = LunarLander/resources;
 			sourceTree = "<group>";
 		};
 		AAD5CEDA173ECAA90015B6B9 = {
 			isa = PBXGroup;
 			children = (
-				AA95BB17174451FF00B452BC /* resources */,
 				AAD5CEE5173ECAAA0015B6B9 /* LunarLander */,
 				AAD5CEE4173ECAAA0015B6B9 /* Products */,
 			);
@@ -129,17 +144,7 @@
 		AAD5CEE5173ECAAA0015B6B9 /* LunarLander */ = {
 			isa = PBXGroup;
 			children = (
-				AA30AEFF174AE6FE00ECA52B /* frame_1.bmp */,
-				AA30AF00174AE6FE00ECA52B /* frame_2.bmp */,
-				AA30AF01174AE6FF00ECA52B /* frame_3.bmp */,
-				AA30AF02174AE70000ECA52B /* frame_4.bmp */,
-				AA30AF03174AE70100ECA52B /* frame_5.bmp */,
-				AA30AF04174AE70200ECA52B /* frame_6.bmp */,
-				AA30AF05174AE70400ECA52B /* frame_7.bmp */,
-				AA30AF06174AE70600ECA52B /* frame_8.bmp */,
-				AA30AF07174AE70900ECA52B /* frame_9.bmp */,
-				AA30AF08174AE70C00ECA52B /* frame_10.bmp */,
-				AA30AF09174AE71000ECA52B /* frame_11.bmp */,
+				AA32AF1D174EF3AC00AD3F06 /* resources */,
 				AAD5CEE6173ECAAA0015B6B9 /* main.cpp */,
 				AAD5CEE8173ECAAA0015B6B9 /* LunarLander.1 */,
 				AAD5CEEF173EFA710015B6B9 /* EventLoopManager.cpp */,
@@ -172,6 +177,10 @@
 				AA5337C9174BC30E004C4EE2 /* LandingPad.h */,
 				AA6693BC1749BD13005A3019 /* WelcomeLayer.cpp */,
 				AA6693BD1749BD13005A3019 /* WelcomeLayer.h */,
+				AA32AF1A174EF1D200AD3F06 /* GameOverLayer.cpp */,
+				AA32AF1B174EF1D300AD3F06 /* GameOverLayer.h */,
+				AA32AF1E174F0E2500AD3F06 /* CongratulationLayer.cpp */,
+				AA32AF1F174F0E2600AD3F06 /* CongratulationLayer.h */,
 				AA5337C5174BBEB2004C4EE2 /* CollisionDetector.cpp */,
 				AA5337C6174BBEB2004C4EE2 /* CollisionDetector.h */,
 				AAEC33BF174C626B00049E40 /* PathDefinition.h */,
@@ -247,6 +256,8 @@
 				AA5337C7174BBEB2004C4EE2 /* CollisionDetector.cpp in Sources */,
 				AA5337CA174BC30E004C4EE2 /* LandingPad.cpp in Sources */,
 				AAEC33BE174BF06400049E40 /* TerrainSegment.cpp in Sources */,
+				AA32AF1C174EF1D400AD3F06 /* GameOverLayer.cpp in Sources */,
+				AA32AF20174F0E2600AD3F06 /* CongratulationLayer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
