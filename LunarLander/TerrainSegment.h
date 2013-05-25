@@ -15,6 +15,7 @@
 #include "PathDefinition.h"
 #include "DrawableObject.h"
 #include "XInfo.h"
+#include "Spaceship.h"
 
 using namespace std;
 
@@ -23,6 +24,7 @@ class TerrainSegment : public DrawableObject {
 public:
     TerrainSegment(TerrainPoint p1, TerrainPoint p2, PathSpec pathSpec, int numOfPoints);
     ~TerrainSegment();
+    bool isSpaceshipWithinSegment(Spaceship* spaceship);
     bool isOffScreen();
     bool isCompletelyInsideScreen();
     void shiftTerrainSegment(double deltaX);

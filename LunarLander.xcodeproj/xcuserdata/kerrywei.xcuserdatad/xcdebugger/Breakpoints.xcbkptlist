@@ -20,52 +20,13 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "LunarLander/CollisionDetector.cpp"
-         timestampString = "391057796.764883"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "87"
-         endingLineNumber = "87"
-         landmarkName = "CollisionDetector::collisionHappens(Spaceship* spaceship, TerrainSegment* segment)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "LunarLander/TerrainSegment.cpp"
-         timestampString = "390985535.44752"
+         timestampString = "391144921.246636"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "100"
-         endingLineNumber = "100"
+         startingLineNumber = "110"
+         endingLineNumber = "110"
          landmarkName = "TerrainSegment::getBoundaryPoints(int x)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "LunarLander/CollisionDetector.cpp"
-         timestampString = "391057796.764883"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "81"
-         endingLineNumber = "81"
-         landmarkName = "CollisionDetector::collisionHappens(Spaceship* spaceship, TerrainSegment* segment)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "LunarLander/CollisionDetector.cpp"
-         timestampString = "391057796.764883"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "89"
-         endingLineNumber = "89"
-         landmarkName = "CollisionDetector::collisionHappens(Spaceship* spaceship, TerrainSegment* segment)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -98,19 +59,6 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "LunarLander/GameOverLayer.cpp"
-         timestampString = "391052019.835724"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "41"
-         endingLineNumber = "41"
-         landmarkName = "GameOverLayer::drawGameOverScreen()"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "LunarLander/EventLoopManager.cpp"
          timestampString = "391057761.201938"
          startingColumnNumber = "9223372036854775807"
@@ -125,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LunarLander/CollisionDetector.cpp"
-         timestampString = "391058029.772797"
+         timestampString = "391144921.246636"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "55"
-         endingLineNumber = "55"
+         startingLineNumber = "57"
+         endingLineNumber = "57"
          landmarkName = "CollisionDetector::isLandingSuccessful()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -137,39 +85,39 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "LunarLander/TerrainGenerator.cpp"
-         timestampString = "391140848.165189"
+         filePath = "LunarLander/TerrainSegment.cpp"
+         timestampString = "391144921.246636"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "199"
-         endingLineNumber = "199"
-         landmarkName = "TerrainGenerator::addTerrainSegments(vector&lt;TerrainSegment*&gt;* terrain, TerrainPoint* startPoint)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "LunarLander/TerrainGenerator.cpp"
-         timestampString = "391140868.55256"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "200"
-         endingLineNumber = "200"
-         landmarkName = "TerrainGenerator::addTerrainSegments(vector&lt;TerrainSegment*&gt;* terrain, TerrainPoint* startPoint)"
+         startingLineNumber = "113"
+         endingLineNumber = "113"
+         landmarkName = "TerrainSegment::getBoundaryPoints(int x)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "LunarLander/TerrainGenerator.cpp"
-         timestampString = "391140902.767642"
+         filePath = "LunarLander/CollisionDetector.cpp"
+         timestampString = "391146494.050493"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "204"
-         endingLineNumber = "204"
-         landmarkName = "TerrainGenerator::addTerrainSegments(vector&lt;TerrainSegment*&gt;* terrain, TerrainPoint* startPoint)"
+         startingLineNumber = "95"
+         endingLineNumber = "95"
+         landmarkName = "CollisionDetector::collisionHappens(Spaceship* spaceship)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "LunarLander/CollisionDetector.cpp"
+         timestampString = "391146494.050493"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "112"
+         endingLineNumber = "112"
+         landmarkName = "CollisionDetector::collisionHappens(Spaceship* spaceship)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

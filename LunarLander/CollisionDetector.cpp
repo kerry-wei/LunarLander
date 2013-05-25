@@ -37,9 +37,11 @@ bool CollisionDetector::spaceshipCrashWillHappen() {
     TerrainSegment* segment = terrainGenerator->getTerrainSegmentBasedOnX(spaceship->getXPosition());
     
     if (typeid(LandingPad) == typeid(*segment)) {
-        return spaceship->getYSpeed() > landingSpeedLimit;
+        bool softLanding = spaceship->getYSpeed() > landingSpeedLimit;
+        bool withinLandingPad = segment->isSpaceshipWithinSegment(spaceship);
+        return softLanding && withinLandingPad;
     } else {
-        return collisionHappens(spaceship, segment);
+        return collisionHappens(spaceship);
     }
     
 }
@@ -53,16 +55,12 @@ bool CollisionDetector::isLandingSuccessful() {
     if (typeid(LandingPad) != typeid(*segment)) {
         return false;
     } else {
-        return landingSucceeds(spaceship, segment);
+        return landingSucceeds(spaceship);
     }
 }
 
 
-bool CollisionDetector::collisionHappens(Spaceship* spaceship, TerrainSegment* segment) {
-    if (segment == NULL) {
-        return false;
-    }
-    
+bool CollisionDetector::collisionHappens(Spaceship* spaceship) {
     XInfo* xInfo = XInfo::instance(0, NULL);
     int pixmapHeight = xInfo->getPixmapHeight();
     int shipWidth = spaceship->getWidth();
@@ -70,9 +68,18 @@ bool CollisionDetector::collisionHappens(Spaceship* spaceship, TerrainSegment* s
     int shipX1 = spaceship->getXPosition();
     int shipY1 = pixmapHeight - spaceship->getYPosition() - shipHeight;
     int shipX2 = shipX1 + shipWidth;
-    //int shipY2 = shipY1;
+    int shipY2 = shipY1;
     
-    vector<TerrainPoint> boundaryPoints = segment->getBoundaryPoints(shipX1);
+    TerrainGenerator* terrainGenerator = TerrainGenerator::instance();
+    TerrainSegment* segment1 = terrainGenerator->getTerrainSegmentBasedOnX(shipX1);
+    TerrainSegment* segment2 = terrainGenerator->getTerrainSegmentBasedOnX(shipX2);
+    
+    if (segment1 == NULL || segment2 == NULL) {
+        return false;
+    }
+    
+    // check left point:
+    vector<TerrainPoint> boundaryPoints = segment1->getBoundaryPoints(shipX1);
     TerrainPoint p1 = boundaryPoints.at(0);
     TerrainPoint p2 = boundaryPoints.at(1);
     
@@ -81,24 +88,36 @@ bool CollisionDetector::collisionHappens(Spaceship* spaceship, TerrainSegment* s
     int p2x = p2.getXCoordinate();
     int p2y = pixmapHeight - p2.getYCoordinate();
     
-    if (shipY1 > p1y && shipY1 > p2y) {
-        return false;
+    double slope = ((double)(p2y - p1y)) / (double)(p2x - p1x);
+    double b = ((double)(p2x * p1y - p2y * p1x)) / (double)(p2x - p1x);
+    
+    if (slope * shipX1 + b > shipY1) {
+        return true;
     }
     
-    double slope = (p2y - p1y) / (p2x - p1x);
-    if (slope * (shipX1 - p1.getXCoordinate()) + p1.getYCoordinate() > 0) {
+    // check right point:
+    boundaryPoints = segment2->getBoundaryPoints(shipX2);
+    p1 = boundaryPoints.at(0);
+    p2 = boundaryPoints.at(1);
+    
+    p1x = p1.getXCoordinate();
+    p1y = pixmapHeight - p1.getYCoordinate();
+    p2x = p2.getXCoordinate();
+    p2y = pixmapHeight - p2.getYCoordinate();
+    
+    slope = ((double)(p2y - p1y)) / (double)(p2x - p1x);
+    b = ((double)(p2x * p1y - p2y * p1x)) / (double)(p2x - p1x);
+    
+    if (slope * shipX2 + b > shipY2) {
         return true;
-    } else if (slope * (shipX2 - p1.getXCoordinate()) + p1.getYCoordinate() > 0) {
-        return true;
-    } else {
-        return false;
     }
     
+    return false;
 }
 
-bool CollisionDetector::landingSucceeds(Spaceship* spaceship, TerrainSegment* segment) {
+bool CollisionDetector::landingSucceeds(Spaceship* spaceship) {
     double shipYSpeed = spaceship->getYSpeed();
-    bool landingHappens = collisionHappens(spaceship, segment);
+    bool landingHappens = collisionHappens(spaceship);
     bool landingSuccess = landingHappens && (shipYSpeed < landingSpeedLimit);
     return landingSuccess;
 }

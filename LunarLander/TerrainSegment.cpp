@@ -21,6 +21,16 @@ TerrainSegment::TerrainSegment(TerrainPoint p1, TerrainPoint p2, PathSpec pathSp
     this->updateXOffsets();
 }
 
+bool TerrainSegment::isSpaceshipWithinSegment(Spaceship* spaceship) {
+    int shipX1 = spaceship->getXPosition();
+    int shipX2 = shipX1 + spaceship->getWidth();
+    
+    int segmentLeft = getLeftmostXCoordinate();
+    int segmentRight = getRightmostXCoordinate();
+    
+    return (shipX1 >= segmentLeft && shipX2 <= segmentRight);
+}
+
 bool TerrainSegment::isOffScreen() {
     TerrainPoint p1 = segmentPath.at(0);
     TerrainPoint p2 = segmentPath.at(segmentPath.size() - 1);

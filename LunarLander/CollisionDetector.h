@@ -28,8 +28,8 @@ private:
     TerrainManager* terrainManager;
     double landingSpeedLimit;
     
-    bool collisionHappens(Spaceship* spaceship, TerrainSegment* segment);
-    bool landingSucceeds(Spaceship* spaceship, TerrainSegment* segment);
+    bool collisionHappens(Spaceship* spaceship);
+    bool landingSucceeds(Spaceship* spaceship);
 };
 
 #endif /* defined(__LunarLander__CollisionDetector__) */

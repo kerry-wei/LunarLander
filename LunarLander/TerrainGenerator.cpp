@@ -194,12 +194,6 @@ void TerrainGenerator::addTerrainSegments(vector<TerrainSegment*>* terrain, Terr
         controlPoints.push_back(controlPoint);
     }
     
-    // debug:
-    cout << "print control points: " << endl;
-    Utilities::printControlPoints(controlPoints, (int)controlPoints.size());
-    cout << endl << endl;
-    // end
-    
     // generate path segments:
     for (int i = 0; i < numOfTerrainSegment; i++) {
         TerrainPoint startPoint = controlPoints[i];
