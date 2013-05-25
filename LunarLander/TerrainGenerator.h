@@ -59,7 +59,7 @@ private:
     void shiftTerrain(vector<TerrainSegment*>* terrain, double deltaX);
     vector<PathSpec> generatePathSpecs(int numOfPathSpec);
     void resetTerrain(vector<TerrainSegment*>* terrain);
-    void addTerrainSegments(vector<TerrainSegment*>* terrain);
+    void addTerrainSegments(vector<TerrainSegment*>* terrain, TerrainPoint* startPoint);
     
 };
 

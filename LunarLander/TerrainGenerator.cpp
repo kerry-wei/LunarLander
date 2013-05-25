@@ -67,7 +67,7 @@ void TerrainGenerator::resetAllTerrain() {
 }
 
 vector<TerrainSegment*>* TerrainGenerator::createInitialTerrain() {
-    addTerrainSegments(activeTerrain);
+    addTerrainSegments(activeTerrain, NULL);
     return activeTerrain;
 }
 
@@ -97,7 +97,7 @@ void TerrainGenerator::resetTerrain(vector<TerrainSegment*>* terrain) {
     terrain->clear();
 }
 
-void TerrainGenerator::addTerrainSegments(vector<TerrainSegment*>* terrain) {
+void TerrainGenerator::addTerrainSegments(vector<TerrainSegment*>* terrain, TerrainPoint* startPoint) {
     // generate path specifications:
     vector<PathSpec> pathSpecs = generatePathSpecs(numOfTerrainSegment);
     
@@ -116,7 +116,7 @@ void TerrainGenerator::addTerrainSegments(vector<TerrainSegment*>* terrain) {
     const int upPathLowerLimit = 200;
     
     // int numOfControlPoints = numOfTerrainSegment + 1;
-    vector<TerrainPoint> controlPoints =  vector<TerrainPoint>();//[numOfControlPoints];
+    vector<TerrainPoint> controlPoints =  vector<TerrainPoint>();
     
     // generate control points:
     for (int i = 0; i < numOfTerrainSegment; i++) {
@@ -157,12 +157,19 @@ void TerrainGenerator::addTerrainSegments(vector<TerrainSegment*>* terrain) {
                 break;
         }
         
-        //cout << "pathXComponent = " << pathXComponent << endl;
-        //cout << "pathYComponent = " << pathYComponent << endl;
+        short endX, endY, previousX, previousY;
         
-        short endX, endY;
-        short previousX = i == 0 ? 0 : controlPoints[i].getXCoordinate();
-        short previousY = i == 0 ? (short)(minFlyingSpace + rand() % (windowHeight - minFlyingSpace)) : controlPoints[i].getYCoordinate();
+        if (i == 0 && startPoint) {
+            previousX = 0;
+            previousY = startPoint->getYCoordinate();
+        } else if (i == 0 && !startPoint) {
+            previousX = 0;
+            previousY = (short)(minFlyingSpace + rand() % (windowHeight - minFlyingSpace));
+        } else {
+            previousX = controlPoints[i].getXCoordinate();
+            previousY = controlPoints[i].getYCoordinate();
+        }
+        
         endY = previousY - pathYComponent;
         // y-coordinate should be bounded: between minFlyingSpace and height of the screen
         if (endY < minFlyingSpace) {
@@ -183,10 +190,15 @@ void TerrainGenerator::addTerrainSegments(vector<TerrainSegment*>* terrain) {
             endX = (short)(previousX + pathXComponent);
         }
         
-        // push last control point:
         TerrainPoint controlPoint = TerrainPoint(endX, endY);
         controlPoints.push_back(controlPoint);
     }
+    
+    // debug:
+    cout << "print control points: " << endl;
+    Utilities::printControlPoints(controlPoints, (int)controlPoints.size());
+    cout << endl << endl;
+    // end
     
     // generate path segments:
     for (int i = 0; i < numOfTerrainSegment; i++) {
@@ -281,7 +293,8 @@ vector<TerrainSegment*>* TerrainGenerator::getLeftShiftedTerrain(double deltaX) 
     TerrainSegment* lastActiveSegment = activeTerrain->at(activeTerrain->size() - 1);
     if (lastActiveSegment->isCompletelyInsideScreen()) {
         if (!rightInactiveTerrain || rightInactiveTerrain->empty()) {
-            addTerrainSegments(rightInactiveTerrain);
+            TerrainPoint p = lastActiveSegment->getRightmostPoint();
+            addTerrainSegments(rightInactiveTerrain, &p);
         }
         
         // pop first element from right inactive terrain, and push first point back to current terrain

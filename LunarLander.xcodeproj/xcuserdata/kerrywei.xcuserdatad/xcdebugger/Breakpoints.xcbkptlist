@@ -137,39 +137,39 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "LunarLander/Spaceship.cpp"
-         timestampString = "391128283.972347"
+         filePath = "LunarLander/TerrainGenerator.cpp"
+         timestampString = "391140848.165189"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "129"
-         endingLineNumber = "129"
-         landmarkName = "Spaceship::move(int deltaX, int deltaY)"
+         startingLineNumber = "199"
+         endingLineNumber = "199"
+         landmarkName = "TerrainGenerator::addTerrainSegments(vector&lt;TerrainSegment*&gt;* terrain, TerrainPoint* startPoint)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "LunarLander/TerrainGenerator.cpp"
+         timestampString = "391140868.55256"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "200"
+         endingLineNumber = "200"
+         landmarkName = "TerrainGenerator::addTerrainSegments(vector&lt;TerrainSegment*&gt;* terrain, TerrainPoint* startPoint)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "LunarLander/Spaceship.cpp"
-         timestampString = "391128283.972347"
+         filePath = "LunarLander/TerrainGenerator.cpp"
+         timestampString = "391140902.767642"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "133"
-         endingLineNumber = "133"
-         landmarkName = "Spaceship::move(int deltaX, int deltaY)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "LunarLander/Spaceship.cpp"
-         timestampString = "391128283.972347"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "136"
-         endingLineNumber = "136"
-         landmarkName = "Spaceship::move(int deltaX, int deltaY)"
+         startingLineNumber = "204"
+         endingLineNumber = "204"
+         landmarkName = "TerrainGenerator::addTerrainSegments(vector&lt;TerrainSegment*&gt;* terrain, TerrainPoint* startPoint)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
