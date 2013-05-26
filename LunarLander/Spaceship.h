@@ -20,11 +20,11 @@ using namespace std;
 class Spaceship : public DrawableObject {
 public:
     Spaceship();
-    Spaceship(int x, int y);
+    Spaceship(double x, double y);
     ~Spaceship();
     void reset();
     
-    void move(int deltaX, int deltaY);
+    void move(double deltaX, double deltaY);
     void moveToInitialPosition();
     void draw();
     void playAnimation();
@@ -49,8 +49,8 @@ private:
     int xLeftLimit;
     int xRightLimit;
     
-    int initialX;
-    int initialY;
+    double initialX;
+    double initialY;
     
     int animationFrameCount;
     int animationFrameIndex;

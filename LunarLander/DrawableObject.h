@@ -15,11 +15,11 @@
 class DrawableObject {
 public:
     DrawableObject();
-    DrawableObject(int x, int y);
-    DrawableObject(int x, int y, int width, int height);
-    void move(int deltaX, int deltaY);
-    int getXPosition();
-    int getYPosition();
+    DrawableObject(double x, double y);
+    DrawableObject(double x, double y, int width, int height);
+    void move(double deltaX, double deltaY);
+    double getXPosition();
+    double getYPosition();
     int getWidth();
     int getHeight();
     virtual void draw();
@@ -29,8 +29,8 @@ public:
 protected:
     XInfo *xInfo;
     
-    int x;
-    int y;
+    double x;
+    double y;
     int width;
     int height;
 };

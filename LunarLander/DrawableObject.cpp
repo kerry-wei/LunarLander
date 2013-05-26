@@ -11,14 +11,14 @@
 #include <X11/Xlib.h>
 
 DrawableObject::DrawableObject() {
-    this->x = 0;
-    this->y = 0;
+    this->x = 0.0;
+    this->y = 0.0;
     this->width = 0;
     this->height = 0;
     xInfo = XInfo::instance(0, NULL);
 }
 
-DrawableObject::DrawableObject(int x, int y) {
+DrawableObject::DrawableObject(double x, double y) {
     this->x = x;
     this->y = y;
     this->width = 0;
@@ -26,7 +26,7 @@ DrawableObject::DrawableObject(int x, int y) {
     xInfo = XInfo::instance(0, NULL);
 }
 
-DrawableObject::DrawableObject(int x, int y, int width, int height) {
+DrawableObject::DrawableObject(double x, double y, int width, int height) {
     this->x = x;
     this->y = y;
     this->width = width;
@@ -34,16 +34,16 @@ DrawableObject::DrawableObject(int x, int y, int width, int height) {
     xInfo = XInfo::instance(0, NULL);
 }
 
-void DrawableObject::move(int deltaX, int deltaY) {
+void DrawableObject::move(double deltaX, double deltaY) {
     this->x += deltaX;
     this->y += deltaY;
 }
 
-int DrawableObject::getXPosition() {
+double DrawableObject::getXPosition() {
     return x;
 }
 
-int DrawableObject::getYPosition() {
+double DrawableObject::getYPosition() {
     return y;
 }
 

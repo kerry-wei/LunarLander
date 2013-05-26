@@ -20,8 +20,8 @@
 
 
 Spaceship::Spaceship() : DrawableObject() {
-    initialX = 150;
-    initialY = 10;
+    initialX = 150.0;
+    initialY = 10.0;
     xSpeed = 0.0;
     ySpeed = 0.0;
     xSpeedLimit = 3.0;
@@ -34,9 +34,9 @@ Spaceship::Spaceship() : DrawableObject() {
     
 }
 
-Spaceship::Spaceship(int x, int y) : DrawableObject(x, y) {
-    initialX = 150;
-    initialY = 10;
+Spaceship::Spaceship(double x, double y) : DrawableObject(x, y) {
+    initialX = 150.0;
+    initialY = 10.0;
     xSpeed = 1.0;
     ySpeed = 0.0;
     xSpeedLimit = 2.5;
@@ -115,13 +115,7 @@ void Spaceship::reset() {
     animationFrameIndex = 0;
 }
 
-void Spaceship::move(int deltaX, int deltaY) {
-    int windowWidth = xInfo->getWindowWidth();
-    
-    if (x + deltaX <= 0 || y + deltaY + height <= 0 || x + deltaX + width >= windowWidth) {
-        return;
-    }
-    
+void Spaceship::move(double deltaX, double deltaY) {
     this->clearDrawing();
     
     TerrainManager* terrainManager = TerrainManager::instance();
@@ -168,9 +162,16 @@ void Spaceship:: playAnimation() {
 void Spaceship::timerUpdate() {
     ySpeed += 0.012;
     
-    // cout << "xSpeed = " << xSpeed << ", ySpeed = " << ySpeed << endl;
+    if (x + xSpeed <= 0 && y + ySpeed >= 0) {
+        move(0.0, ySpeed);
+    } else if (x + xSpeed <= 0 && y + ySpeed <= 0) {
+        move(0.0, 0.0);
+    } else if (x + xSpeed >= 0 && y + ySpeed <= 0) {
+        move(xSpeed, 0.0);
+    } else {
+        move(xSpeed, ySpeed);
+    }
     
-    move(xSpeed, ySpeed);
     playAnimation();
 }
 
