@@ -89,9 +89,15 @@ void GameSceneManager::updateGameInfo(int score, double time, double fuel, doubl
 }
 
 void GameSceneManager::copyPixmapToWindow() {
-    XCopyArea(xInfo->display, xInfo->pixmap, xInfo->window, xInfo->gc[0],
-              0, 0, xInfo->getPixmapWidth(), xInfo->getPixmapHeight(),  // region of pixmap to copy
-              xInfo->pixmapXOffset, xInfo->pixmapYOffset); // position to put top left corner of pixmap in window
+    GC gc = xInfo->gc[0];
+    Display* display = xInfo->display;
+    Drawable from = xInfo->pixmap;
+    Drawable to = xInfo->window;
+    int width = xInfo->getPixmapWidth();
+    int height = xInfo->getPixmapHeight();
+    int xOffset = xInfo->pixmapXOffset;
+    int yOffset = xInfo->pixmapYOffset;
+    XCopyArea(display, from, to, gc, 0, 0, width, height, xOffset, yOffset);
     XFlush(xInfo->display);
 }
 

@@ -50,6 +50,7 @@ void GameObjectManager:: timerUpdate() {
 
 
 GameObjectManager::~GameObjectManager() {
+    delete spaceship;
 }
 
 

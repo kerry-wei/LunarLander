@@ -21,12 +21,22 @@
 		AA95BB0D1742F82900B452BC /* TerrainGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA95BB0B1742F82900B452BC /* TerrainGenerator.cpp */; };
 		AA95BB131743FBE700B452BC /* DrawableObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA95BB111743FBE700B452BC /* DrawableObject.cpp */; };
 		AA95BB161743FD3000B452BC /* Spaceship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA95BB141743FD3000B452BC /* Spaceship.cpp */; };
+		AAB28F731751907300A6484E /* GameContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB28F711751907300A6484E /* GameContext.cpp */; };
+		AAB28F76175192CE00A6484E /* GameStateAbstract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB28F74175192CE00A6484E /* GameStateAbstract.cpp */; };
+		AAB28F791751939600A6484E /* GameStateNotStarted.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB28F771751939500A6484E /* GameStateNotStarted.cpp */; };
+		AAB2C02F1751B05E007C2FB7 /* GameStateLandingSucceed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB2C02D1751B05D007C2FB7 /* GameStateLandingSucceed.cpp */; };
+		AAB2C0321751B07B007C2FB7 /* GameStateLandingSucceedSmallWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB2C0301751B07A007C2FB7 /* GameStateLandingSucceedSmallWindow.cpp */; };
 		AAD5CEE7173ECAAA0015B6B9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD5CEE6173ECAAA0015B6B9 /* main.cpp */; };
 		AAD5CEE9173ECAAA0015B6B9 /* LunarLander.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = AAD5CEE8173ECAAA0015B6B9 /* LunarLander.1 */; };
 		AAD5CEF1173EFA710015B6B9 /* EventLoopManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD5CEEF173EFA710015B6B9 /* EventLoopManager.cpp */; };
 		AAD5CEF4173EFC150015B6B9 /* XInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD5CEF2173EFC150015B6B9 /* XInfo.cpp */; };
 		AAD5CEF7173EFCFA0015B6B9 /* Utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD5CEF5173EFCFA0015B6B9 /* Utilities.cpp */; };
 		AAEC33BE174BF06400049E40 /* TerrainSegment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAEC33BC174BF06400049E40 /* TerrainSegment.cpp */; };
+		AAF655E1175195C100FCB2AE /* GameStatePausedSmallWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF655DF175195C100FCB2AE /* GameStatePausedSmallWindow.cpp */; };
+		AAF655E41751964D00FCB2AE /* GameStateNotStartedSmallWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF655E21751964D00FCB2AE /* GameStateNotStartedSmallWindow.cpp */; };
+		AAF655E7175197AA00FCB2AE /* GameStateStarted.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF655E5175197AA00FCB2AE /* GameStateStarted.cpp */; };
+		AAF655EA1751982500FCB2AE /* GameStateGameOver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF655E81751982500FCB2AE /* GameStateGameOver.cpp */; };
+		AAF655ED1751988900FCB2AE /* GameStateGameOverSmallWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAF655EB1751988900FCB2AE /* GameStateGameOverSmallWindow.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -82,6 +92,16 @@
 		AA95BB121743FBE700B452BC /* DrawableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawableObject.h; sourceTree = "<group>"; };
 		AA95BB141743FD3000B452BC /* Spaceship.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Spaceship.cpp; sourceTree = "<group>"; };
 		AA95BB151743FD3000B452BC /* Spaceship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spaceship.h; sourceTree = "<group>"; };
+		AAB28F711751907300A6484E /* GameContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameContext.cpp; sourceTree = "<group>"; };
+		AAB28F721751907300A6484E /* GameContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameContext.h; sourceTree = "<group>"; };
+		AAB28F74175192CE00A6484E /* GameStateAbstract.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameStateAbstract.cpp; sourceTree = "<group>"; };
+		AAB28F75175192CE00A6484E /* GameStateAbstract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStateAbstract.h; sourceTree = "<group>"; };
+		AAB28F771751939500A6484E /* GameStateNotStarted.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameStateNotStarted.cpp; sourceTree = "<group>"; };
+		AAB28F781751939500A6484E /* GameStateNotStarted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStateNotStarted.h; sourceTree = "<group>"; };
+		AAB2C02D1751B05D007C2FB7 /* GameStateLandingSucceed.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameStateLandingSucceed.cpp; sourceTree = "<group>"; };
+		AAB2C02E1751B05D007C2FB7 /* GameStateLandingSucceed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStateLandingSucceed.h; sourceTree = "<group>"; };
+		AAB2C0301751B07A007C2FB7 /* GameStateLandingSucceedSmallWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameStateLandingSucceedSmallWindow.cpp; sourceTree = "<group>"; };
+		AAB2C0311751B07B007C2FB7 /* GameStateLandingSucceedSmallWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStateLandingSucceedSmallWindow.h; sourceTree = "<group>"; };
 		AAD5CEE3173ECAAA0015B6B9 /* LunarLander */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LunarLander; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAD5CEE6173ECAAA0015B6B9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		AAD5CEE8173ECAAA0015B6B9 /* LunarLander.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = LunarLander.1; sourceTree = "<group>"; };
@@ -94,6 +114,16 @@
 		AAEC33BC174BF06400049E40 /* TerrainSegment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TerrainSegment.cpp; sourceTree = "<group>"; };
 		AAEC33BD174BF06400049E40 /* TerrainSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainSegment.h; sourceTree = "<group>"; };
 		AAEC33BF174C626B00049E40 /* PathDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PathDefinition.h; sourceTree = "<group>"; };
+		AAF655DF175195C100FCB2AE /* GameStatePausedSmallWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameStatePausedSmallWindow.cpp; sourceTree = "<group>"; };
+		AAF655E0175195C100FCB2AE /* GameStatePausedSmallWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStatePausedSmallWindow.h; sourceTree = "<group>"; };
+		AAF655E21751964D00FCB2AE /* GameStateNotStartedSmallWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameStateNotStartedSmallWindow.cpp; sourceTree = "<group>"; };
+		AAF655E31751964D00FCB2AE /* GameStateNotStartedSmallWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStateNotStartedSmallWindow.h; sourceTree = "<group>"; };
+		AAF655E5175197AA00FCB2AE /* GameStateStarted.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameStateStarted.cpp; sourceTree = "<group>"; };
+		AAF655E6175197AA00FCB2AE /* GameStateStarted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStateStarted.h; sourceTree = "<group>"; };
+		AAF655E81751982500FCB2AE /* GameStateGameOver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameStateGameOver.cpp; sourceTree = "<group>"; };
+		AAF655E91751982500FCB2AE /* GameStateGameOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStateGameOver.h; sourceTree = "<group>"; };
+		AAF655EB1751988900FCB2AE /* GameStateGameOverSmallWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameStateGameOverSmallWindow.cpp; sourceTree = "<group>"; };
+		AAF655EC1751988900FCB2AE /* GameStateGameOverSmallWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStateGameOverSmallWindow.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +155,35 @@
 			name = resources;
 			sourceTree = "<group>";
 		};
+		AAB28F7017518FE600A6484E /* game context */ = {
+			isa = PBXGroup;
+			children = (
+				AAB28F711751907300A6484E /* GameContext.cpp */,
+				AAB28F721751907300A6484E /* GameContext.h */,
+				AA6174251745C2EE00BC1EAA /* GameState.cpp */,
+				AA6174261745C2EE00BC1EAA /* GameState.h */,
+				AAB28F74175192CE00A6484E /* GameStateAbstract.cpp */,
+				AAB28F75175192CE00A6484E /* GameStateAbstract.h */,
+				AAB28F771751939500A6484E /* GameStateNotStarted.cpp */,
+				AAB28F781751939500A6484E /* GameStateNotStarted.h */,
+				AAF655E21751964D00FCB2AE /* GameStateNotStartedSmallWindow.cpp */,
+				AAF655E31751964D00FCB2AE /* GameStateNotStartedSmallWindow.h */,
+				AAF655E5175197AA00FCB2AE /* GameStateStarted.cpp */,
+				AAF655E6175197AA00FCB2AE /* GameStateStarted.h */,
+				AAF655DF175195C100FCB2AE /* GameStatePausedSmallWindow.cpp */,
+				AAF655E0175195C100FCB2AE /* GameStatePausedSmallWindow.h */,
+				AAF655E81751982500FCB2AE /* GameStateGameOver.cpp */,
+				AAF655E91751982500FCB2AE /* GameStateGameOver.h */,
+				AAF655EB1751988900FCB2AE /* GameStateGameOverSmallWindow.cpp */,
+				AAF655EC1751988900FCB2AE /* GameStateGameOverSmallWindow.h */,
+				AAB2C02D1751B05D007C2FB7 /* GameStateLandingSucceed.cpp */,
+				AAB2C02E1751B05D007C2FB7 /* GameStateLandingSucceed.h */,
+				AAB2C0301751B07A007C2FB7 /* GameStateLandingSucceedSmallWindow.cpp */,
+				AAB2C0311751B07B007C2FB7 /* GameStateLandingSucceedSmallWindow.h */,
+			);
+			name = "game context";
+			sourceTree = "<group>";
+		};
 		AAD5CEDA173ECAA90015B6B9 = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +203,7 @@
 		AAD5CEE5173ECAAA0015B6B9 /* LunarLander */ = {
 			isa = PBXGroup;
 			children = (
+				AAB28F7017518FE600A6484E /* game context */,
 				AA32AF1D174EF3AC00AD3F06 /* resources */,
 				AAD5CEE6173ECAAA0015B6B9 /* main.cpp */,
 				AAD5CEE8173ECAAA0015B6B9 /* LunarLander.1 */,
@@ -159,8 +219,6 @@
 				AA95BB151743FD3000B452BC /* Spaceship.h */,
 				AA61742217456A2300BC1EAA /* GameObjectManager.cpp */,
 				AA61742317456A2300BC1EAA /* GameObjectManager.h */,
-				AA6174251745C2EE00BC1EAA /* GameState.cpp */,
-				AA6174261745C2EE00BC1EAA /* GameState.h */,
 				AA6174281745C8B900BC1EAA /* GameSceneManager.cpp */,
 				AA6174291745C8B900BC1EAA /* GameSceneManager.h */,
 				AA95BB0B1742F82900B452BC /* TerrainGenerator.cpp */,
@@ -258,6 +316,16 @@
 				AAEC33BE174BF06400049E40 /* TerrainSegment.cpp in Sources */,
 				AA32AF1C174EF1D400AD3F06 /* GameOverLayer.cpp in Sources */,
 				AA32AF20174F0E2600AD3F06 /* CongratulationLayer.cpp in Sources */,
+				AAB28F731751907300A6484E /* GameContext.cpp in Sources */,
+				AAB28F76175192CE00A6484E /* GameStateAbstract.cpp in Sources */,
+				AAB28F791751939600A6484E /* GameStateNotStarted.cpp in Sources */,
+				AAF655E1175195C100FCB2AE /* GameStatePausedSmallWindow.cpp in Sources */,
+				AAF655E41751964D00FCB2AE /* GameStateNotStartedSmallWindow.cpp in Sources */,
+				AAF655E7175197AA00FCB2AE /* GameStateStarted.cpp in Sources */,
+				AAF655EA1751982500FCB2AE /* GameStateGameOver.cpp in Sources */,
+				AAF655ED1751988900FCB2AE /* GameStateGameOverSmallWindow.cpp in Sources */,
+				AAB2C02F1751B05E007C2FB7 /* GameStateLandingSucceed.cpp in Sources */,
+				AAB2C0321751B07B007C2FB7 /* GameStateLandingSucceedSmallWindow.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

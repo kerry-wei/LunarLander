@@ -213,4 +213,8 @@ double Spaceship::getYSpeed() {
     return ySpeed;
 }
 
+Spaceship::~Spaceship() {
+    delete animations;
+}
+
 

@@ -86,11 +86,8 @@ void WelcomeLayer::clearWelcomeScreen() {
 
 void WelcomeLayer::updateGameInfo(int score, double time, double fuel, double altitude, double xSpeed, double ySpeed) {
     //cout << "score: " << score << ", time: " << time << ", fuel: " << fuel << ", altitude: " << altitude << ", xSpeed: " << xSpeed << ", ySpeed:" << ySpeed << endl;
-    XWindowAttributes windowAttr;
-    XGetWindowAttributes(xInfo->display, xInfo->window, &windowAttr);
-    GC gc = xInfo->gc[0]; //XCreateGC(xInfo->display, xInfo->window, 0, 0);
-    //XSetBackground(xInfo->display, gc, BlackPixel(xInfo->display, xInfo->screen));
-    //XSetForeground(xInfo->display, gc, WhitePixel(xInfo->display, xInfo->screen));
+    GC gc = xInfo->gc[0];
+    GC blackGC = xInfo->gc[1];
     XFontStruct *font = XLoadQueryFont(xInfo->display, "*x10");
     XSetFont(xInfo->display, xInfo->gc[0], font->fid);
     string numToString;
@@ -98,9 +95,10 @@ void WelcomeLayer::updateGameInfo(int score, double time, double fuel, double al
     int direction_return;
     int font_ascent_return, font_descent_return;
     XCharStruct overall_return;
-    // left side:
-    //XClearArea(xInfo->display, xInfo->pixmap, scoreLabelXPos, scoreLabelYPos - scoreLabelHeight, scoreLabelWidth, scoreLabelHeight, false);
     
+    // left side:
+    //XClearArea(xInfo->display, xInfo->window, scoreLabelXPos, scoreLabelYPos - scoreLabelHeight, scoreLabelWidth, scoreLabelHeight, false);
+    XFillRectangle(xInfo->display, xInfo->pixmap, blackGC, scoreLabelXPos, scoreLabelYPos - scoreLabelHeight, scoreLabelWidth, scoreLabelHeight);
     string scoreMsg = "SCORE: ";
     convert.clear();
     convert.str("");
@@ -112,7 +110,8 @@ void WelcomeLayer::updateGameInfo(int score, double time, double fuel, double al
     scoreLabelHeight = font_ascent_return + font_descent_return;
     XDrawImageString(xInfo->display, xInfo->pixmap, gc, scoreLabelXPos, scoreLabelYPos, scoreMsg.c_str(), (int)scoreMsg.length());
     
-    //XClearArea(xInfo->display, xInfo->pixmap, timeLabelXPos, timeLabelYPos - timeLabelHeight, timeLabelWidth, timeLabelHeight, false);
+    //XClearArea(xInfo->display, xInfo->window, timeLabelXPos, timeLabelYPos - timeLabelHeight, timeLabelWidth, timeLabelHeight, false);
+    XFillRectangle(xInfo->display, xInfo->pixmap, blackGC, timeLabelXPos, timeLabelYPos - timeLabelHeight, timeLabelWidth, timeLabelHeight);
     string timeMsg = "TIME: ";
     convert.clear();
     convert.str("");
@@ -124,7 +123,8 @@ void WelcomeLayer::updateGameInfo(int score, double time, double fuel, double al
     timeLabelWidth = XTextWidth(font, timeMsg.c_str(), (int)timeMsg.length());
     XDrawImageString(xInfo->display, xInfo->pixmap, gc, timeLabelXPos, timeLabelYPos, timeMsg.c_str(), (int)timeMsg.length());
     
-    //XClearArea(xInfo->display, xInfo->pixmap, fuelLabelXPos, fuelLabelYPos - fuelLabelHeight, fuelLabelWidth, fuelLabelHeight, false);
+    //XClearArea(xInfo->display, xInfo->window, fuelLabelXPos, fuelLabelYPos - fuelLabelHeight, fuelLabelWidth, fuelLabelHeight, false);
+    XFillRectangle(xInfo->display, xInfo->pixmap, blackGC, fuelLabelXPos, fuelLabelYPos - fuelLabelHeight, fuelLabelWidth, fuelLabelHeight);
     string fuelMsg = "FUEL: ";
     convert.clear();
     convert.str("");
@@ -138,7 +138,8 @@ void WelcomeLayer::updateGameInfo(int score, double time, double fuel, double al
     
     
     // right side:
-    //XClearArea(xInfo->display, xInfo->pixmap, altitudeLabelXPos, altitudeLabelYPos - altitudeLabelHeight, altitudeLabelWidth + 40, altitudeLabelHeight, false);
+    //XClearArea(xInfo->display, xInfo->window, altitudeLabelXPos, altitudeLabelYPos - altitudeLabelHeight, altitudeLabelWidth, altitudeLabelHeight, false);
+    XFillRectangle(xInfo->display, xInfo->pixmap, blackGC, altitudeLabelXPos, altitudeLabelYPos - altitudeLabelHeight, altitudeLabelWidth, altitudeLabelHeight);
     string altitudeMsg = "ALTITUDE: ";
     convert.clear();
     convert.str("");
@@ -150,7 +151,8 @@ void WelcomeLayer::updateGameInfo(int score, double time, double fuel, double al
     altitudeLabelWidth = XTextWidth(font, altitudeMsg.c_str(), (int)altitudeMsg.length());
     XDrawImageString(xInfo->display, xInfo->pixmap, gc, altitudeLabelXPos, altitudeLabelYPos, altitudeMsg.c_str(), (int)altitudeMsg.length());
     
-    //XClearArea(xInfo->display, xInfo->pixmap, xSpeedLabelXPos, xSpeedLabelYPos - xSpeedLabelHeight, xSpeedLabelWidth + 40, xSpeedLabelHeight, false);
+    //XClearArea(xInfo->display, xInfo->window, xSpeedLabelXPos, xSpeedLabelYPos - xSpeedLabelHeight, xSpeedLabelWidth + 30, xSpeedLabelHeight, false);
+    XFillRectangle(xInfo->display, xInfo->pixmap, blackGC, xSpeedLabelXPos, xSpeedLabelYPos - xSpeedLabelHeight, xSpeedLabelWidth + 10, xSpeedLabelHeight + 1);
     string horizontalSpeedMsg = "HORIZONTAL SPEED: ";
     convert.clear();
     convert.str("");
@@ -162,7 +164,8 @@ void WelcomeLayer::updateGameInfo(int score, double time, double fuel, double al
     xSpeedLabelWidth = XTextWidth(font, horizontalSpeedMsg.c_str(), (int)horizontalSpeedMsg.length());
     XDrawImageString(xInfo->display, xInfo->pixmap, gc, xSpeedLabelXPos, xSpeedLabelYPos, horizontalSpeedMsg.c_str(), (int)horizontalSpeedMsg.length());
     
-    //XClearArea(xInfo->display, xInfo->pixmap, ySpeedLabelXPos, ySpeedLabelYPos - ySpeedLabelHeight, ySpeedLabelWidth + 40, ySpeedLabelHeight, false);
+    //XClearArea(xInfo->display, xInfo->window, ySpeedLabelXPos, ySpeedLabelYPos - ySpeedLabelHeight, ySpeedLabelWidth, ySpeedLabelHeight, false);
+    XFillRectangle(xInfo->display, xInfo->pixmap, blackGC, ySpeedLabelXPos, ySpeedLabelYPos - ySpeedLabelHeight, ySpeedLabelWidth, ySpeedLabelHeight);
     string verticalSpeedMsg = "VERTICAL SPEED: ";
     convert.clear();
     convert.str("");

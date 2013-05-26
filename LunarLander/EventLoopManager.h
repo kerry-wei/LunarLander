@@ -15,6 +15,8 @@
 #include "GameState.h"
 #include "GameObjectManager.h"
 #include "TerrainManager.h"
+#include "CollisionDetector.h"
+#include "GameContext.h"
 
 using namespace std;
 
@@ -29,14 +31,15 @@ private:
     GameSceneManager* gameSceneManager;
     GameObjectManager* gameObjManager;
     TerrainManager* terrainManager;
-    GameState* gameState;
+    //GameState* gameState;
+    CollisionDetector* collisionDetector;
+    GameContext* gameContext;
     
     void handleQuitGame();
     void handleStartGame();
     void handleSpaceshipCrash();
     void handleLandingSucceed();
     void handleResize(XInfo* xInfo, XEvent &event);
-    void repositionPixmap(XConfigureEvent xce);
 };
 
 
